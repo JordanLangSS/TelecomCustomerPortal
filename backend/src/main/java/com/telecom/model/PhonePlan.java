@@ -27,9 +27,11 @@ public class PhonePlan {
 	@NotEmpty(message = "The Phone Plan must have a name")
 	private String planName;
 
+	@Column
 	private int deviceLimit;
 
 	// @NotEmpty(message = "The Phone Plan must have a price")
+	@Column
 	private double price;
 
 }

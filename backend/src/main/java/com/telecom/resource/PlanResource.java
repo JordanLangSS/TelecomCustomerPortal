@@ -33,7 +33,7 @@ public class PlanResource {
 		return ResponseEntity.ok(
 				Response.builder()
 						.timeStamp(now())
-						.data(new HashMap<String, List>() {
+						.data(new HashMap<String, List<?>>() {
 							{
 								put("Plans", planService.list(30));
 							}
