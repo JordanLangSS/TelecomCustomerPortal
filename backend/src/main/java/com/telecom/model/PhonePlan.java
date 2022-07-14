@@ -20,18 +20,16 @@ import lombok.NoArgsConstructor;
 public class PhonePlan {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int planId;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long planId;
 	
 	@Column(unique = true)
 	@NotEmpty(message = "The Phone Plan must have a name")
 	private String planName;
 	
-	@Column
 	private int deviceLimit;
 	
-	@Column
-	@NotEmpty(message = "The Phone Plan must have a price")
+	//@NotEmpty(message = "The Phone Plan must have a price")
 	private double price;
 
 }

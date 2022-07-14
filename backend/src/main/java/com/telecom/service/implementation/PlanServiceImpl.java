@@ -1,6 +1,7 @@
 package com.telecom.service.implementation;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -16,7 +17,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import static java.lang.Boolean.TRUE;
 
-@RequiredArgsConstructor
+@RequiredArgsConstructor //use this for planService dependency Injection
 @Service
 @Transactional
 @Slf4j //log to see what is happening
@@ -31,7 +32,7 @@ public class PlanServiceImpl implements PlanService {
 	}
 
 	@Override
-	public Collection<PhonePlan> list(int limit) {
+	public List<PhonePlan> list(int limit) {
 		log.info("Getting all Phone Plans");
 		
 		//Return a list (instead of a full page)to limit the amount per page
