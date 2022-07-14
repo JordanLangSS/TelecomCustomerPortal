@@ -11,10 +11,10 @@ public interface PlanService {
 
 	List<PhonePlan> list(int limit);
 
-	PhonePlan get(int id);
+	PhonePlan get(Long id);
 
 	PhonePlan update(PhonePlan phonePlan);
 
-	Boolean delete(int id);
+	Boolean delete(Long id);
 
 }
