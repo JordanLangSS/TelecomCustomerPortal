@@ -34,4 +34,5 @@ public class PhonePlan {
 	@Column
 	private double price;
 
+	
 }
