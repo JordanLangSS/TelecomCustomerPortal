@@ -2,7 +2,9 @@ package com.telecom.resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -84,6 +86,43 @@ public class PlanResource {
 						.message("Plan Created")
 						.status(CREATED)
 						.statusCode(CREATED.value())
+						.build());
+	}
+
+	@GetMapping("/get/{id}")
+	public ResponseEntity<Response> getPlan(@PathVariable("id") Long id) {
+
+		return ResponseEntity.ok(
+				Response.builder()
+						.timeStamp(now())
+						.data(new HashMap<String, PhonePlan>() {
+							{
+								put("Plan", planService.get(id));
+							}
+						})
+						// .data(Map.of("plans", planService.list(30)))
+						.message("Plan Retrieved")
+						.status(OK)
+						.statusCode(OK.value())
+						.build());
+	}
+
+	@DeleteMapping("/delete/{id}")
+	// Use validation to check if the plan name is not empty on entry
+	public ResponseEntity<Response> deletePlan(@PathVariable("id") Long id) {
+
+		return ResponseEntity.ok(
+				Response.builder()
+						.timeStamp(now())
+						.data(new HashMap<String, Boolean>() {
+							{
+								put("Deleted", planService.delete(id));
+							}
+						})
+						// .data(Map.of("plans", planService.list(30)))
+						.message("Plan Deleted")
+						.status(OK)
+						.statusCode(OK.value())
 						.build());
 	}
 

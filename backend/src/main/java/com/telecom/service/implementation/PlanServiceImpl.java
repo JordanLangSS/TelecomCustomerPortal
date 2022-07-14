@@ -44,7 +44,7 @@ public class PlanServiceImpl implements PlanService {
 	}
 
 	@Override
-	public PhonePlan get(int id) {
+	public PhonePlan get(Long id) {
 		log.info("Getting Phone Plan Id: {}", id);
 		// You have to use .get to actually return the phonePlan it finds by that id
 		return planRepository.findById(id).get();
@@ -58,7 +58,7 @@ public class PlanServiceImpl implements PlanService {
 	}
 
 	@Override
-	public Boolean delete(int id) {
+	public Boolean delete(Long id) {
 		log.info("Deleting phone plan Id: {}", id);
 		planRepository.deleteById(id);
 		return TRUE;
