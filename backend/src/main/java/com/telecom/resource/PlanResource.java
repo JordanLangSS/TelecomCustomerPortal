@@ -1,5 +1,6 @@
 package com.telecom.resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,7 +12,7 @@ import com.telecom.model.PhonePlan;
 import com.telecom.model.Response;
 import com.telecom.service.implementation.PlanServiceImpl;
 
-import lombok.RequiredArgsConstructor;
+//import lombok.RequiredArgsConstructor;
 import java.util.*;
 
 import javax.validation.Valid;
@@ -22,10 +23,13 @@ import static java.time.LocalDateTime.now;
 
 @RestController
 @RequestMapping("/plan")
-@RequiredArgsConstructor // use this for planService dependency Injection
+// @RequiredArgsConstructor // use this for planService dependency Injection
 public class PlanResource {
 
-	private final PlanServiceImpl planService;
+	// private final PlanServiceImpl planService;
+
+	@Autowired
+	private PlanServiceImpl planService;
 
 	@GetMapping("/list")
 	public ResponseEntity<Response> getPlans() {
@@ -43,6 +47,25 @@ public class PlanResource {
 						.status(OK)
 						.statusCode(OK.value())
 						.build());
+
+		// ***INSTEAD OF DOING THE BELOW, CUT DOWN ON CODE USING THE .BUILDER() METHOD
+		// FROM LOMBOK!!!!***
+
+		// Response resp = new Response();
+
+		// resp.setTimeStamp(now());
+		// resp.setData(new HashMap<String, List<?>>() {
+		// {
+		// put("Plans", planService.list(30));
+		// }
+		// });
+
+		// resp.setMessage("Plans Retrieved");
+		// resp.setStatus(OK);
+		// resp.setStatusCode(OK.value());
+
+		// return resp;
+
 	}
 
 	@PostMapping("/save")

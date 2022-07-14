@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -12,17 +13,20 @@ import com.telecom.model.PhonePlan;
 import com.telecom.repository.PlanRepository;
 import com.telecom.service.PlanService;
 
-import lombok.RequiredArgsConstructor;
+//import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import static java.lang.Boolean.TRUE;
 
-@RequiredArgsConstructor // use this for planService dependency Injection
+//@RequiredArgsConstructor // use this for planService dependency Injection
 @Service
 @Transactional
 @Slf4j // log to see what is happening
 public class PlanServiceImpl implements PlanService {
 
-	private final PlanRepository planRepository;
+	// private final PlanRepository planRepository;
+
+	@Autowired
+	private PlanRepository planRepository;
 
 	@Override
 	public PhonePlan create(PhonePlan phonePlan) {
