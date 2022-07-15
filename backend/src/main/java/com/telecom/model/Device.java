@@ -6,7 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,21 +15,18 @@ import lombok.NoArgsConstructor;
 @Data // Generate Getters and Setters
 @NoArgsConstructor
 @AllArgsConstructor
-public class PhonePlan {
+public class Device {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long planId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long deviceId;
 
-	@Column(unique = true)
-	@NotEmpty(message = "The Phone Plan must have a name")
-	private String planName;
+    @Column
+    @NotEmpty(message = "The Phone Plan must have a make")
+    private String make;
 
-	@Column
-	private int deviceLimit;
-
-	@Column
-	@NotNull(message = "The Phone Plan must have a price")
-	private Double price;
+    @Column
+    @NotEmpty(message = "The Phone Plan must have a model")
+    private String model;
 
 }

@@ -1,4 +1,4 @@
-package com.telecom.resource;
+package com.telecom.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +26,7 @@ import static java.time.LocalDateTime.now;
 @RestController
 @RequestMapping("/plan")
 // @RequiredArgsConstructor // use this for planService dependency Injection
-public class PlanResource {
+public class PlanController {
 
 	// private final PlanServiceImpl planService;
 
@@ -71,7 +71,8 @@ public class PlanResource {
 	}
 
 	@PostMapping("/save")
-	// Use validation to check if the plan name is not empty on entry
+	// Use valid to check if the new plan is up to validation standards (from
+	// model)
 	public ResponseEntity<Response> savePlans(@RequestBody @Valid PhonePlan plan) {
 
 		return ResponseEntity.ok(
@@ -108,7 +109,6 @@ public class PlanResource {
 	}
 
 	@DeleteMapping("/delete/{id}")
-	// Use validation to check if the plan name is not empty on entry
 	public ResponseEntity<Response> deletePlan(@PathVariable("id") Long id) {
 
 		return ResponseEntity.ok(
