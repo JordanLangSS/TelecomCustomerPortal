@@ -20,9 +20,9 @@ public class Response {
 	protected LocalDateTime timeStamp;
 	protected int statusCode;
 	protected HttpStatus status;
-	protected String reason; // could be null
+	protected String reason; // could be null if no error
 	// possibly use on front end???
 	protected String message; // notification for the user
-	protected String devMessage; // could be null
+	protected String devMessage; // could be null if no error
 	protected Map<?, ?> data;
 }
