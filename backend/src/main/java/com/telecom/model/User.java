@@ -19,13 +19,14 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "userid")
     private Long userId;
 
-    @Column
+    @Column(name = "firstname")
     @NotEmpty(message = "The user must have a first name")
     private String firstName;
 
-    @Column
+    @Column(name = "lastname")
     @NotEmpty(message = "The user must have a last name")
     private String lastName;
 

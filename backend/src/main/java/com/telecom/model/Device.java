@@ -19,6 +19,7 @@ public class Device {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "deviceid")
     private Long deviceId;
 
     @Column

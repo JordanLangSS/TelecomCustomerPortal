@@ -20,13 +20,14 @@ public class PhonePlan {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "planid")
 	private Long planId;
 
-	@Column(unique = true)
+	@Column(unique = true, name = "planname")
 	@NotEmpty(message = "The Phone Plan must have a name")
 	private String planName;
 
-	@Column
+	@Column(name = "devicelimit")
 	private int deviceLimit;
 
 	@Column
