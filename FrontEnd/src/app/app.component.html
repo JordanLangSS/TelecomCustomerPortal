@@ -1,71 +1,66 @@
-
 <div class="container" role="main">
   <div>
     <div>
       <div>
         <h1>Phone Service App!</h1>
-        
       </div>
-     
+
       <!-- can just use the component selector -->
       <!-- <app-owner-list></app-owner-list> -->
 
       <!-- angular has it's own way of routing -->
       <!-- any route output it output to the router outlet -->
       <a [routerLink]="['/user']">User</a> |
-      <a [routerLink]="['/plans']">Plans</a> | 
-      <a [routerLink]="['/devices']">Devices</a> | 
-      <a [routerLink]="['/bill']">View Bill</a> | 
+      <a [routerLink]="['/plans']">Plans</a> |
+      <a [routerLink]="['/devices']">Devices</a> |
+      <a [routerLink]="['/bill']">View Bill</a> |
       <a [routerLink]="['/sign-in']">Sign In</a> |
 
       <router-outlet></router-outlet>
     </div>
-  
   </div>
 
-  
-<div>
-  <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-    <mat-icon>more_vert</mat-icon>
-  </button>
-  <mat-menu #menu="matMenu">
-    <button mat-menu-item>
-      <mat-icon>person</mat-icon>
-      <span><a [routerLink]="['/user']">User</a> Profile</span>
-      
+  <div>
+    <button
+      mat-icon-button
+      [matMenuTriggerFor]="menu"
+      aria-label="Example icon-button with a menu"
+    >
+      <mat-icon>more_vert</mat-icon>
     </button>
-    <button mat-menu-item disabled>
-      <mat-icon>phone</mat-icon>
-      <span><a [routerLink]="['/devices']">Devices</a> Devices</span>
-    </button>
-    <button mat-menu-item>
-      <mat-icon>money</mat-icon>
-      <span><a [routerLink]="['/plans']">Plans</a> Plans</span>
-    </button>
-    <button mat-menu-item>
-      <mat-icon>manage_accounts</mat-icon>
-      <span>Manage <a [routerLink]="['/devices']">Devices</a></span>
-    </button>
-    <button mat-menu-item>
-      <mat-icon>description</mat-icon>
-      <span><a [routerLink]="['/bill']">View Bill</a>View Bill</span>
-    </button>
-    <button mat-menu-item>
-      <mat-icon>description</mat-icon>
-      <span><a [routerLink]="['/sign-in']">Sign In</a> Sign In</span>
-    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <mat-icon>person</mat-icon>
+        <span><a [routerLink]="['/user']">User</a> Profile</span>
+      </button>
+      <button mat-menu-item disabled>
+        <mat-icon>phone</mat-icon>
+        <span><a [routerLink]="['/devices']">Devices</a> Devices</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>money</mat-icon>
+        <span><a [routerLink]="['/plans']">Plans</a> Plans</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>manage_accounts</mat-icon>
+        <span>Manage <a [routerLink]="['/devices']">Devices</a></span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>description</mat-icon>
+        <span><a [routerLink]="['/bill']">View Bill</a>View Bill</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>description</mat-icon>
+        <span><a [routerLink]="['/sign-in']">Sign In</a> Sign In</span>
+      </button>
 
-<div>
-  
+      <div></div>
+
+      <router-outlet></router-outlet>
+    </mat-menu>
+    <div>
+      <h1>testing123</h1>
+      {{appState$ | async | json}}
+    </div>
+  </div>
 </div>
-
-
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content above * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * End of Placeholder * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-
-<router-outlet></router-outlet>
