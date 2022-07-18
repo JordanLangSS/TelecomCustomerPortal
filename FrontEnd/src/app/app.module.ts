@@ -12,6 +12,7 @@ import { PlansComponent } from './plans/plans.component';
 import { DevicesComponent } from './devices/devices.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatSliderModule,
     MatMenuModule,
     MatIconModule,
+    HttpClientModule
  
   ],
   providers: [],
