@@ -9,7 +9,7 @@ import { CustomResponse } from '../Response/responsePlans';
   providedIn: 'root'
 })
 export class PlanService {
- private readonly apiUrl = 'any';
+ private readonly apiUrl = 'http://localhost:8080';
 
   // inject Http Client
   //use HttpClient to make a call to the backend to get data

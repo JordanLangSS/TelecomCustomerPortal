@@ -5,6 +5,6 @@ export interface AppState<T> {
     // determine the state of the app...use to check the state of the app
     //loading, loaded, or error
     dataState: DataState; 
-    appData?: T; //contain all the data
-    error?: string;
+    appData?: T; //contain all the data...make optional
+    error?: string; //make optional
 }
