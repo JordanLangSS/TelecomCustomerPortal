@@ -11,7 +11,6 @@ import com.telecom.model.Plan;
 
 // class name and primary key type
 @Repository
-@Transactional
 public interface PlanRepository extends JpaRepository<Plan, Long> {
 
 	void deletePlanById(Long id);
