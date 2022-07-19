@@ -2,17 +2,39 @@ package com.telecom.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.telecom.model.Device;
+import com.telecom.repository.DeviceRepository;
 
-public interface DeviceService {
-    // define different functionalities/features for the devices to have
-    Device create(Device device);
+@Service
+@Transactional
+public class DeviceService {
 
-    List<Device> list(int limit);
+    @Autowired
+    private DeviceRepository deviceRepository;
 
-    Device get(Long id);
+    public Device addDevice(Device device) {
+        return deviceRepository.save(device);
+    }
 
-    Device update(Device phonePlan);
+    public List<Device> findAllDevices() {
+        return deviceRepository.findAll();
+    }
 
-    Boolean delete(Long id);
+    public Device updateDevice(Device device) {
+        return deviceRepository.save(device);
+    }
+
+    public void deleteDeviceById(Long id) {
+        deviceRepository.deleteDeviceById(id);
+    }
+
+    public Device findDeviceById(Long id) {
+        return deviceRepository.findDeviceById(id)
+                .orElseThrow(() -> new PlanNotFoundException("Device with id" + id + " was not found"));
+    }
 }
