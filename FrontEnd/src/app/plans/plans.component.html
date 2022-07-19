@@ -1,1 +1,18 @@
 <p>plans works!</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Device Limit</th>
+      <th>Price</th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let plan of plansList">
+    <tr>
+      <td>{{plan.planName}}</td>
+      <td>{{plan.deviceLimit}}</td>
+      <td>{{plan.price}}</td>
+    </tr>
+  </tbody>
+</table>

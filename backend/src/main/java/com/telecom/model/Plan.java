@@ -1,5 +1,7 @@
 package com.telecom.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,18 +18,18 @@ import lombok.NoArgsConstructor;
 @Data // Generate Getters and Setters
 @NoArgsConstructor
 @AllArgsConstructor
-public class PhonePlan {
+public class Plan implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "planid")
-	private Long planId;
+	@Column
+	private Long id;
 
-	@Column(unique = true, name = "planname")
+	@Column(unique = true)
 	@NotEmpty(message = "The Phone Plan must have a name")
 	private String planName;
 
-	@Column(name = "devicelimit")
+	@Column
 	private int deviceLimit;
 
 	@Column
