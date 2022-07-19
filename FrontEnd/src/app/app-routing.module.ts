@@ -4,6 +4,8 @@ import { DevicesComponent } from './devices/devices.component';
 import { PlansComponent } from './plans/plans.component';
 import { LoginComponent } from './login/login.component';
 import { UserComponent } from './user/user.component';
+import { BillingComponent } from './billing/billing.component';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
 
@@ -18,6 +20,12 @@ const routes: Routes = [
   },
   {
     path: 'login', component: LoginComponent
+  },
+  {
+    path: 'billing', component: BillingComponent
+  },
+  {
+    path: '', component: HomeComponent
   },
 
 ];
