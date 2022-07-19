@@ -6,9 +6,11 @@ import {MatIconModule} from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
-import {MatCardModule} from '@angular/material/card';
-import {MatDividerModule} from '@angular/material/divider';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -16,9 +18,10 @@ import { AppComponent } from './app.component';
 import { UserComponent } from './user/user.component';
 import { PlansComponent } from './plans/plans.component';
 import { DevicesComponent } from './devices/devices.component';
-import { SignInComponent } from './sign-in/sign-in.component';
+import { LoginComponent } from './login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -27,7 +30,7 @@ import { HttpClientModule } from '@angular/common/http';
     UserComponent,
     PlansComponent,
     DevicesComponent,
-    SignInComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,7 +45,10 @@ import { HttpClientModule } from '@angular/common/http';
     MatButtonModule,
     MatDividerModule,
     MatCardModule,
+    MatInputModule,
+    ReactiveFormsModule,
     MatProgressBarModule
+
  
   ],
   providers: [],
