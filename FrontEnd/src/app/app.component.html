@@ -1,61 +1,38 @@
-<div class="container" role="main">
-  <div>
-    <div>
-      <div>
-        <h1>Phone Service App!</h1>
-      </div>
+<mat-toolbar class="mat-elevation-z8">
+  <button
+    mat-icon-button
+    *ngIf="sidenav.mode === 'over'"
+    (click)="sidenav.toggle()"
+  >
+    <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
+    <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
+  </button>
+</mat-toolbar>
 
-      <!-- can just use the component selector -->
-      <!-- <app-owner-list></app-owner-list> -->
+<mat-sidenav-container>
+  <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
+    <h4 class="name">Nav Bar</h4>
 
-      <!-- angular has it's own way of routing -->
-      <!-- any route output it output to the router outlet -->
-      <a [routerLink]="['/user']">User</a> |
-      <a [routerLink]="['/plans']">Plans</a> |
-      <a [routerLink]="['/devices']">Devices</a> |
-      <a [routerLink]="['/bill']">View Bill</a> |
-      <a [routerLink]="['/sign-in']">Sign In</a> |
+    <mat-divider></mat-divider>
 
+    <button mat-button class="menu-button" routerLink="/plans">
+      <mat-icon>home</mat-icon>
+      <span>Home</span>
+    </button>
+    <button mat-button class="menu-button" routerLink="/sign-in">
+      <mat-icon>person</mat-icon>
+      <span>Sign-In</span>
+    </button>
+    <button mat-button class="menu-button" routerLink="/bill">
+      <mat-icon>info</mat-icon>
+      <span>Billing</span>
+    </button>
+
+    <mat-divider></mat-divider>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="content mat-elevation-z8">
       <router-outlet></router-outlet>
     </div>
-  </div>
-
-  <div>
-    <button
-      mat-icon-button
-      [matMenuTriggerFor]="menu"
-      aria-label="Example icon-button with a menu"
-    >
-      <mat-icon>more_vert</mat-icon>
-    </button>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item>
-        <mat-icon>person</mat-icon>
-        <span><a [routerLink]="['/user']">User</a> Profile</span>
-      </button>
-      <button mat-menu-item disabled>
-        <mat-icon>phone</mat-icon>
-        <span><a [routerLink]="['/devices']">Devices</a> Devices</span>
-      </button>
-      <button mat-menu-item>
-        <mat-icon>money</mat-icon>
-        <span><a [routerLink]="['/plans']">Plans</a> Plans</span>
-      </button>
-      <button mat-menu-item>
-        <mat-icon>manage_accounts</mat-icon>
-        <span>Manage <a [routerLink]="['/devices']">Devices</a></span>
-      </button>
-      <button mat-menu-item>
-        <mat-icon>description</mat-icon>
-        <span><a [routerLink]="['/bill']">View Bill</a>View Bill</span>
-      </button>
-      <button mat-menu-item>
-        <mat-icon>description</mat-icon>
-        <span><a [routerLink]="['/sign-in']">Sign In</a> Sign In</span>
-      </button>
-
-      <div></div>
-    </mat-menu>
-  </div>
-  <router-outlet></router-outlet>
-</div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
