@@ -3,6 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -13,6 +17,7 @@ import { DevicesComponent } from './devices/devices.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -29,7 +34,11 @@ import { HttpClientModule } from '@angular/common/http';
     MatSliderModule,
     MatMenuModule,
     MatIconModule,
-    HttpClientModule
+    HttpClientModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatButtonModule,
+    MatDividerModule,
  
   ],
   providers: [],
