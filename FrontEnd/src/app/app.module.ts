@@ -22,6 +22,8 @@ import { LoginComponent } from './login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { BillingComponent } from './billing/billing.component';
+import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
@@ -31,6 +33,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     PlansComponent,
     DevicesComponent,
     LoginComponent,
+    BillingComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,

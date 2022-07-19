@@ -22,10 +22,13 @@ export class LoginComponent implements OnInit {
 
 
   onLogin() {
+    //Don't submit if the entered information is not up to standard  
     if (!this.loginForm.valid) {
       return;
     }
-    console.log(this.loginForm.value);
+    console.log(this.loginForm.get('email').value);
+    console.log(this.loginForm.get('password').value);
+    console.log(this.loginForm.value); //both values together
   }
 
 }
