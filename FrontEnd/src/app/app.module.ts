@@ -6,7 +6,9 @@ import {MatIconModule} from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDividerModule } from '@angular/material/divider';
+import {MatCardModule} from '@angular/material/card';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -39,6 +41,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatSidenavModule,
     MatButtonModule,
     MatDividerModule,
+    MatCardModule,
+    MatProgressBarModule
  
   ],
   providers: [],
