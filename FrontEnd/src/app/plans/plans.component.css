@@ -11,3 +11,12 @@ table, th , td {
   table tr:nth-child(even) {
     background-color: #ffffff;
   }
+  .flex-container {
+    display: flex;
+    justify-content: center;
+}
+
+.flex-child {
+    flex: 0;
+    
+}  

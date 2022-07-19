@@ -9,6 +9,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -45,6 +47,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatCardModule,
     MatInputModule,
     ReactiveFormsModule,
+    MatProgressBarModule
+
  
   ],
   providers: [],
