@@ -43,10 +43,10 @@ public class BackendApplication {
 	@Bean
 	CommandLineRunner runUsers(UserRepository userRepo) {
 		return args -> {
-			userRepo.save(new User(null, "Jordan", "Lang", "jordanlang@comcast.net", "password1"));
-			userRepo.save(new User(null, "Kevin", "Opoku-Agyemang", "Kevin@gmail.com", "password2"));
-			userRepo.save(new User(null, "firstName3", "LastName3", "someEmail@gmail.com", "password3"));
-			userRepo.save(new User(null, "firstName4", "LastName4", "someOtherEmail@gmail.com", "password4"));
+			userRepo.save(new User(null, "JordanL", "password1"));
+			userRepo.save(new User(null, "KevinO", "password2"));
+			userRepo.save(new User(null, "firstName3", "password3"));
+			userRepo.save(new User(null, "firstName4", "password4"));
 
 		};
 	}

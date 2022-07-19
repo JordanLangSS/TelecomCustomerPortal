@@ -1,11 +1,12 @@
 package com.telecom.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotEmpty;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Data // Generate Getters and Setters
 @NoArgsConstructor
 @AllArgsConstructor
-public class Device {
+public class CurrentPlan implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,11 +24,9 @@ public class Device {
     private Long id;
 
     @Column
-    @NotEmpty(message = "The Phone Plan must have a make")
-    private String make;
+    private Long userId;
 
     @Column
-    @NotEmpty(message = "The Phone Plan must have a model")
-    private String model;
+    private Long planId;
 
 }

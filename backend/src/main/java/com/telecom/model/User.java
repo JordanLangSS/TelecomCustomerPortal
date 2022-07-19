@@ -19,22 +19,27 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "userid")
-    private Long userId;
-
-    @Column(name = "firstname")
-    @NotEmpty(message = "The user must have a first name")
-    private String firstName;
-
-    @Column(name = "lastname")
-    @NotEmpty(message = "The user must have a last name")
-    private String lastName;
-
     @Column
-    @NotEmpty(message = "The user must have an email")
-    private String email;
+    private Long id;
+
+    @Column(unique = true)
+    @NotEmpty(message = "The user must have a username")
+    private String userName;
 
     @Column
     @NotEmpty(message = "The user must have a password")
     private String password;
+
+    // @Column(name = "firstname")
+    // @NotEmpty(message = "The user must have a first name")
+    // private String firstName;
+
+    // @Column(name = "lastname")
+    // @NotEmpty(message = "The user must have a last name")
+    // private String lastName;
+
+    // @Column
+    // @NotEmpty(message = "The user must have an email")
+    // private String email;
+
 }

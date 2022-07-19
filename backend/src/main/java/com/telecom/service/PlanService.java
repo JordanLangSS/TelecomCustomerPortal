@@ -10,12 +10,10 @@ import com.telecom.model.Plan;
 import com.telecom.repository.PlanRepository;
 
 import lombok.extern.slf4j.Slf4j;
-import static java.lang.Boolean.TRUE;
 
 @Slf4j // log to see what is happening
 @Service
 public class PlanService {
-	// private final PlanRepository planRepository;
 
 	@Autowired
 	private PlanRepository planRepository;
@@ -27,13 +25,11 @@ public class PlanService {
 
 	public List<Plan> findAllPlans() {
 		log.info("Getting all Phone Plans");
-
 		return planRepository.findAll();
 	}
 
 	public Plan updatePlan(Plan plan) {
 		log.info("Updating phone plan: {}", plan.getPlanName());
-		// ****if the Id does not exist, it will just create it!!!****
 		return planRepository.save(plan);
 	}
 
@@ -44,7 +40,6 @@ public class PlanService {
 
 	public Plan findPlanById(Long id) {
 		log.info("Getting Phone Plan Id: {}", id);
-		// You have to use .get to actually return the phonePlan it finds by that id
 		return planRepository.findPlanById(id)
 				.orElseThrow(() -> new PlanNotFoundException("Plan with id" + id + " was not found"));
 	}
