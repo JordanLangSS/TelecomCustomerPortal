@@ -1,72 +1,147 @@
-<p>plans works!</p>
+<div class="content mat-elevation-z8">
+  preview selection
+  <section class="pricing-section">
+    <div class="container">
+      <div class="row justify-content-md-center">
+        <div class="col-xl-5 col-lg-6 col-md-8">
+          <div class="section-title text-center title-ex1">
+            <h2>Pricing Tables</h2>
+          </div>
+        </div>
+      </div>
+      <!-- Pricing Table starts -->
+      <div class="container" id="main-container">
+        <div class="row">
+          <div *ngFor="let plan of plansList" class="col-md-4">
+            <div class="price-card">
+              <h2>{{plan.planName}}</h2>
+              <p>ADD A DESCRIPTION TO THE DB FOR THIS</p>
+              <p class="price">
+                <span>{{plan.price}}</span
+                >/ Month
+              </p>
+              <ul class="pricing-offers">
+                <li>
+                  Have {{plan.deviceLimit}} devices on your plan all at once!
+                </li>
+              </ul>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Device Limit</th>
-      <th>Price</th>
-    </tr>
-  </thead>
-  <tbody *ngFor="let plan of plansList">
-    <tr>
-      <td>{{plan.planName}}</td>
-      <td>{{plan.deviceLimit}}</td>
-      <td>{{plan.price}}</td>
-    </tr>
-  </tbody>
-</table>
+              <a
+                class="btn btn-primary btn-mid"
+                (click)="onOpenModal(plan, 'add')"
+                >Add Now</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<div class="flex-container">
-  <div class="flex-child">
-    <mat-card style="width: 300px">
-      <mat-card-subtitle>Ultimate Plan</mat-card-subtitle>
-      <mat-card-title>$79.99</mat-card-title>
-      <mat-card-content>
-        <p>For those who want more for their money</p>
-      </mat-card-content>
-      <mat-divider inset></mat-divider>
-      <mat-card-actions>
-        <button mat-button>Add Plan</button>
-      </mat-card-actions>
-      <mat-card-footer>
-        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-      </mat-card-footer>
-    </mat-card>
+  <!-- Modal -->
+  <div
+    class="modal fade"
+    id="addModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">
+            Are you sure you want to add this Plan?
+          </h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form #addForm="ngForm">
+            <div class="form-group">
+              <label for="planName">Name</label>
+              <input
+                readonly
+                type="text"
+                ngModel="{{editPlan?.planName}}"
+                name="planName"
+                class="form-control"
+                id="planName"
+                placeholder="Plan Name"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="deviceLimit">Device Limit</label>
+              <input
+                readonly
+                type="number"
+                ngModel="{{editPlan?.deviceLimit}}"
+                name="deviceLimit"
+                class="form-control"
+                id="deviceLimit"
+                placeholder="Device Limit"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="price">Price</label>
+              <input
+                readonly
+                type="number"
+                ngModel="{{editPlan?.price}}"
+                name="price"
+                class="form-control"
+                id="price"
+                placeholder="Price"
+                required
+              />
+            </div>
+
+            <div class="modal-footer">
+              <button
+                type="button"
+                id="add-plan-form"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+              <button
+                [disabled]="addForm.invalid"
+                type="submit"
+                class="btn btn-primary"
+                (click)="onAddPlan(addForm.value)"
+              >
+                Save changes
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="flex-child">
-    <mat-card style="width: 300px">
-      <mat-card-subtitle>Basic Plan</mat-card-subtitle>
-      <mat-card-title>$19.99</mat-card-title>
-      <mat-card-content>
-        <p>This is our basic plan</p>
-      </mat-card-content>
-      <mat-divider inset></mat-divider>
-      <mat-card-actions>
-        <button mat-button>Add Plan</button>
-        <button mat-button></button>
-      </mat-card-actions>
-      <mat-card-footer>
-        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-      </mat-card-footer>
-    </mat-card>
-  </div>
-
-  <div class="float-child">
-    <mat-card style="width: 300px">
-      <mat-card-subtitle>Journey Man Plan</mat-card-subtitle>
-      <mat-card-title>$39.99</mat-card-title>
-      <mat-card-content>
-        <p>Affordable bang for your buck</p>
-      </mat-card-content>
-      <mat-divider inset></mat-divider>
-      <mat-card-actions>
-        <button mat-button>Add Plan</button>
-      </mat-card-actions>
-      <mat-card-footer>
-        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-      </mat-card-footer>
-    </mat-card>
-  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Device Limit</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let plan of plansList">
+      <tr>
+        <td>{{plan.planName}}</td>
+        <td>{{plan.deviceLimit}}</td>
+        <td>{{plan.price}}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
