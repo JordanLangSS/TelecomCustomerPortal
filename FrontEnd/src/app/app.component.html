@@ -4,8 +4,8 @@
     *ngIf="sidenav.mode === 'over'"
     (click)="sidenav.toggle()"
   >
-    <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
-    <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
+    <mat-icon class="icon-display" *ngIf="!sidenav.opened"> menu </mat-icon>
+    <mat-icon class="icon-display" *ngIf="sidenav.opened"> close </mat-icon>
   </button>
 </mat-toolbar>
 
@@ -15,7 +15,7 @@
     class="mat-elevation-z8"
     (click)="closeSidenav()"
   >
-    <h4 class="name">Nav Bar</h4>
+    <h4 class="name"><Menu></Menu></h4>
 
     <mat-divider></mat-divider>
 
