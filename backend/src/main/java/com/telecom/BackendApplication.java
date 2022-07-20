@@ -25,7 +25,6 @@ public class BackendApplication {
 			planRepo.save(new Plan(null, "Plan number 1", 3, 100.00));
 			planRepo.save(new Plan(null, "Plan number 2", 20, 300.00));
 			planRepo.save(new Plan(null, "Plan number 3", 15, 150.00));
-			planRepo.save(new Plan(null, "Plan number 4", 5, 500.00));
 		};
 	}
 
