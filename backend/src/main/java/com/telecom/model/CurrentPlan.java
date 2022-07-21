@@ -23,10 +23,12 @@ public class CurrentPlan implements Serializable {
     @Column
     private Long id;
 
+    // not sure if this has to be a long because it is a long in the user model
     @Column
-    private Long userId;
+    private int userId;
 
+    // not sure if this has to be a long because it is a long in the plan model
     @Column
-    private Long planId;
+    private int planId;
 
 }

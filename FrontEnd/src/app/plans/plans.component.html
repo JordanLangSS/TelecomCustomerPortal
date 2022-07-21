@@ -129,20 +129,41 @@
     </div>
   </div>
 
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Device Limit</th>
-        <th>Price</th>
-      </tr>
-    </thead>
-    <tbody *ngFor="let plan of plansList">
-      <tr>
-        <td>{{plan.planName}}</td>
-        <td>{{plan.deviceLimit}}</td>
-        <td>{{plan.price}}</td>
-      </tr>
-    </tbody>
-  </table>
+  <!------------------------------------------------->
+  <div class="contain">
+    <div class="card">
+      <div class="card-header">Active Plans</div>
+      <div class="card-body">
+        <table class="table table-striped table-hover table-bordered">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Device Limit</th>
+              <th>Price</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let plan of plansList">
+            <tr>
+              <td>{{plan.planName}}</td>
+              <td>{{plan.deviceLimit}}</td>
+              <td>{{plan.price}}</td>
+              <td>
+                <button
+                  class="btn btn-primary badge rounded-pill text-bg-primary float-end"
+                >
+                  Edit
+                </button>
+                <button
+                  class="btn btn-danger badge rounded-pill text-bg-danger float-end"
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>

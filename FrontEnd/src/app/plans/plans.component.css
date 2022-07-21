@@ -236,3 +236,10 @@ ul li {
   float: right;
 }
 
+.contain{
+margin: auto;
+padding-top: 100px;
+width: 40%;
+}
+
+
