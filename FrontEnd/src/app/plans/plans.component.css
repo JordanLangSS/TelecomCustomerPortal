@@ -201,6 +201,7 @@ ul li {
 .modal-content {
     height: 36rem;
     width: 50rem;
+    font-weight: bold;
     font-size: 2rem;
     background-color:#BBD6EC;
 }       
