@@ -19,6 +19,9 @@ public class BackendApplication {
 		SpringApplication.run(BackendApplication.class, args);
 	}
 
+	// Use command line runner to execute the queries AFTER Spring Boot has started
+	// Drops all the tables and re-creates them each time due to "ddl-auto: create"
+	// in the application.yml file
 	@Bean
 	CommandLineRunner runPlans(PlanRepository planRepo) {
 		return args -> {

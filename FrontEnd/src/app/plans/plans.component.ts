@@ -42,21 +42,21 @@ export class PlansComponent implements OnInit {
   }
 
   public onOpenModal(plan: Plan, mode: string): void {
-    const container = document.getElementById('main-container');
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.style.display = 'none';
-    button.setAttribute('data-backdrop','static');
-    button.setAttribute('data-bs-toggle', 'modal');
+    const container = document.getElementById("main-container");
+    const button = document.createElement("button");
+    button.type = "button";
+    button.style.display = "none";
+    button.setAttribute("data-backdrop","static");
+    button.setAttribute("data-bs-toggle", "modal");
     
     //open the add modal if the user clicks the "add now" button
-    if (mode === 'add') {
+    if (mode === "add") {
       this.editPlan = plan;
       button.setAttribute('data-bs-target', '#addModal');
     }
     // Open the Delete Modal if the user clicks the delete button
-    if (mode === 'delete') {
-      button.setAttribute('data-bs-target', '#deletePlanModal');
+    if (mode === "delete") {
+      button.setAttribute("data-bs-target", "#deletePlanModal");
     }
     container.appendChild(button);
     button.click();

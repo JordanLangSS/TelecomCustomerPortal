@@ -21,14 +21,18 @@
                 >/ Month
               </p>
               <ul class="pricing-offers">
-                <li>
-                  Have {{plan.deviceLimit}} devices on your plan all at once!
-                </li>
+                <li>Have {{plan.deviceLimit}} devices all at once!</li>
               </ul>
 
               <a
-                class="btn btn-primary btn-mid"
+                class="btn btn-primary btn-lg"
                 (click)="onOpenModal(plan, 'add')"
+                style="
+                  font-size: 1.6rem;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                "
                 >Add Now</a
               >
             </div>
@@ -46,7 +50,7 @@
     aria-labelledby="exampleModalLabel"
     aria-hidden="true"
   >
-    <div class="modal-dialog">
+    <div class="modal-dialog" style="max-height: 80%">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">
@@ -116,7 +120,7 @@
                 class="btn btn-primary"
                 (click)="onAddPlan(addForm.value)"
               >
-                Save changes
+                Add
               </button>
             </div>
           </form>
