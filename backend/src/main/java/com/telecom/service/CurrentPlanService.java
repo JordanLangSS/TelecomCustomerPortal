@@ -2,6 +2,8 @@ package com.telecom.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,6 +11,7 @@ import com.telecom.model.CurrentPlan;
 import com.telecom.repository.CurrentPlanRepository;
 
 @Service
+@Transactional
 public class CurrentPlanService {
 
     @Autowired

@@ -1,5 +1,6 @@
 <div class="content mat-elevation-z8">
   preview selection
+
   <section class="pricing-section">
     <div class="container">
       <div class="row justify-content-md-center">
@@ -14,21 +15,25 @@
         <div class="row">
           <div *ngFor="let plan of plansList" class="col-md-4">
             <div class="price-card">
-              <h2>{{plan.planName}}</h2>
+              <h2>{{ plan.planName }}</h2>
               <p>ADD A DESCRIPTION TO THE DB FOR THIS</p>
               <p class="price">
-                <span>{{plan.price}}</span
+                <span>{{ plan.price }}</span
                 >/ Month
               </p>
               <ul class="pricing-offers">
-                <li>
-                  Have {{plan.deviceLimit}} devices on your plan all at once!
-                </li>
+                <li>Have {{ plan.deviceLimit }} devices all at once!</li>
               </ul>
 
               <a
-                class="btn btn-primary btn-mid"
+                class="btn btn-primary btn-lg"
                 (click)="onOpenModal(plan, 'add')"
+                style="
+                  font-size: 1.6rem;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                "
                 >Add Now</a
               >
             </div>
@@ -38,7 +43,7 @@
     </div>
   </section>
 
-  <!-- Modal -->
+  <!-- Add Plan Modal -->
   <div
     class="modal fade"
     id="addModal"
@@ -46,7 +51,7 @@
     aria-labelledby="exampleModalLabel"
     aria-hidden="true"
   >
-    <div class="modal-dialog">
+    <div class="modal-dialog" style="max-height: 80%">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">
@@ -64,9 +69,8 @@
             <div class="form-group">
               <label for="planName">Name</label>
               <input
-                readonly
                 type="text"
-                ngModel="{{editPlan?.planName}}"
+                ngModel="{{ editPlan?.planName }}"
                 name="planName"
                 class="form-control"
                 id="planName"
@@ -79,7 +83,7 @@
               <input
                 readonly
                 type="number"
-                ngModel="{{editPlan?.deviceLimit}}"
+                ngModel="{{ editPlan?.deviceLimit }}"
                 name="deviceLimit"
                 class="form-control"
                 id="deviceLimit"
@@ -92,7 +96,7 @@
               <input
                 readonly
                 type="number"
-                ngModel="{{editPlan?.price}}"
+                ngModel="{{ editPlan?.price }}"
                 name="price"
                 class="form-control"
                 id="price"
@@ -116,7 +120,7 @@
                 class="btn btn-primary"
                 (click)="onAddPlan(addForm.value)"
               >
-                Save changes
+                Add
               </button>
             </div>
           </form>
@@ -125,20 +129,90 @@
     </div>
   </div>
 
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Device Limit</th>
-        <th>Price</th>
-      </tr>
-    </thead>
-    <tbody *ngFor="let plan of plansList">
-      <tr>
-        <td>{{plan.planName}}</td>
-        <td>{{plan.deviceLimit}}</td>
-        <td>{{plan.price}}</td>
-      </tr>
-    </tbody>
-  </table>
+  <!-- Delete Plan Modal -->
+  <div
+    class="modal fade"
+    id="deletePlanModal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog" style="max-height: 80%">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Delete Plan</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <p>
+            Are you sure you want to delete this Plan:
+            {{ deletePlan?.planName }}?
+          </p>
+
+          <div class="modal-footer">
+            <button
+              type="button"
+              id="delete-plan-form"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              No
+            </button>
+            <button
+              type="submit"
+              class="btn btn-primary"
+              data-bs-dismiss="modal"
+              (click)="onDeletePlan(deletePlan?.id)"
+            >
+              Yes
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!------------------------------------------------->
+  <div class="contain">
+    <div class="card">
+      <div class="card-header">Active Plans</div>
+      <div class="card-body">
+        <table class="table table-striped table-hover table-bordered">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Device Limit</th>
+              <th>Price</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let plan of plansList">
+            <tr>
+              <td>{{ plan.planName }}</td>
+              <td>{{ plan.deviceLimit }}</td>
+              <td>{{ plan.price }}</td>
+              <td>
+                <button
+                  class="btn btn-primary badge rounded-pill text-bg-primary float-end"
+                >
+                  Edit
+                </button>
+                <button
+                  (click)="onOpenModal(plan, 'delete')"
+                  class="btn btn-danger badge rounded-pill text-bg-danger float-end"
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>

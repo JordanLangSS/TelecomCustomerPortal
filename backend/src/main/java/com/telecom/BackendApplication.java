@@ -5,9 +5,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import com.telecom.model.CurrentPlan;
 import com.telecom.model.Device;
 import com.telecom.model.Plan;
 import com.telecom.model.User;
+import com.telecom.repository.CurrentPlanRepository;
 import com.telecom.repository.DeviceRepository;
 import com.telecom.repository.PlanRepository;
 import com.telecom.repository.UserRepository;
@@ -19,6 +21,9 @@ public class BackendApplication {
 		SpringApplication.run(BackendApplication.class, args);
 	}
 
+	// Use command line runner to execute the queries AFTER Spring Boot has started
+	// Drops all the tables and re-creates them each time due to "ddl-auto: create"
+	// in the application.yml file
 	@Bean
 	CommandLineRunner runPlans(PlanRepository planRepo) {
 		return args -> {
@@ -46,6 +51,13 @@ public class BackendApplication {
 			userRepo.save(new User(null, "KevinO", "password2"));
 			userRepo.save(new User(null, "firstName3", "password3"));
 			userRepo.save(new User(null, "firstName4", "password4"));
+		};
+	}
+
+	@Bean
+	CommandLineRunner runCurrentPlans(CurrentPlanRepository currPlanRepo) {
+		return args -> {
+			currPlanRepo.save(new CurrentPlan(null, 1, 1));
 
 		};
 	}
