@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Plan } from '../Response/plans';
 import { PlanService } from '../service/plan.service';
 
@@ -12,34 +12,55 @@ export class PlansComponent implements OnInit {
 
   public plansList: Plan[];
   public editPlan: Plan; //plan the user clicking on to add to their current plans
+  public deletePlan: Plan; //delete plan when the user clicks delete
 
   constructor(private planService: PlanService) {}
 
   public getPlans(): void {
-    this.planService.getPlans().subscribe(
-      (response: Plan[]) => {
+    this.planService.getPlans().subscribe({
+      next: (response: Plan[]) => {
         this.plansList = response;
       },
-      (error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
+        console.log(error.message);
         alert(error.message);
       }
-    )
+    });
   }
 
   // use a Form to add a plan to the backend
   public onAddPlan(plan: Plan): void {
     document.getElementById("add-plan-form").click();
-    this.planService.addPlan(plan).subscribe(
-      (response: Plan) => {
+    this.planService.addPlan(plan).subscribe({
+      next: (response: Plan) => {
         console.log(response);
-        this.getPlans();
+        this.getPlans(); //call getPlans to re-update list
+        
       },
-      (error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
         console.log(error.message);
         alert(error.message);
       }
-    )
+    });
   }
+
+    // use a Form to add a plan to the backend
+    public onDeletePlan(planId: number): void {
+      document.getElementById("delete-plan-form").click();
+      this.planService.deletePlan(planId).subscribe({
+        //void because service does not return anything
+        next: (response: void) => { 
+          console.log(response);
+          this.getPlans(); //call getPlans to re-update list
+          
+        },
+        error: (error: HttpErrorResponse) => {
+          console.log(error.message);
+          alert(error.message);
+        }
+      });
+    }
+
 
   public onOpenModal(plan: Plan, mode: string): void {
     const container = document.getElementById("main-container");
@@ -56,13 +77,16 @@ export class PlansComponent implements OnInit {
     }
     // Open the Delete Modal if the user clicks the delete button
     if (mode === "delete") {
+      this.deletePlan = plan;
       button.setAttribute("data-bs-target", "#deletePlanModal");
     }
     container.appendChild(button);
     button.click();
   }
 
-  ngOnInit(): void {
+  
+
+  async ngOnInit() {
     this.getPlans();
 
   }
