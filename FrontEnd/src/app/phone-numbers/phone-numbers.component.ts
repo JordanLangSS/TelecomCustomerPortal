@@ -1,7 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { PhoneNumber } from '../Response/phoneNumbers';
-import { Plan } from '../Response/plans';
 import {PhoneNumbersService} from '../service/phone-numbers.service';
 
 @Component({
@@ -13,7 +12,7 @@ export class PhoneNumbersComponent implements OnInit {
 
   public phoneNumberList: PhoneNumber[];
   public editPhoneNumber: PhoneNumber;
-  public deletePhoneNumber: Plan;
+  public deletePhoneNumber: PhoneNumber;
   constructor(private PhoneNumbersService: PhoneNumbersService) { }
 
 

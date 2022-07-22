@@ -5,8 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotEmpty;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,7 +22,6 @@ public class PhoneNumbers {
     private Long id;
 
     @Column
-    @NotEmpty(message = "The Phone Plan must have a make")
-    private int PhoneNumber;
+    private String PhoneNumber;
     
 }

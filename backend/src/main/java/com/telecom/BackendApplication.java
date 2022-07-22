@@ -67,9 +67,9 @@ public class BackendApplication {
 	@Bean
 	CommandLineRunner runPhoneNumber(PhoneNumbersRepository phoneNumberRepo) {
 		return args -> {
-			phoneNumberRepo.save(new PhoneNumbers(null,10000));
-			phoneNumberRepo.save(new PhoneNumbers(null, 30000));
-			phoneNumberRepo.save(new PhoneNumbers(null, 15000));
+			phoneNumberRepo.save(new PhoneNumbers(null,"1234"));
+			phoneNumberRepo.save(new PhoneNumbers(null, "1234"));
+			phoneNumberRepo.save(new PhoneNumbers(null, "1234"));
 		};
 	}
 
