@@ -1,4 +1,4 @@
 export interface PhoneNumber{
     id: number;
-    phoneNumber: number;
+    phoneNumber: string;
 }
