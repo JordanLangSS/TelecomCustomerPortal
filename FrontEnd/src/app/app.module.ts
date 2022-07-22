@@ -26,6 +26,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { BillingComponent } from './billing/billing.component';
 import { HomeComponent } from './home/home.component';
+import { PhoneNumbersComponent } from './phone-numbers/phone-numbers.component';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { HomeComponent } from './home/home.component';
     LoginComponent,
     BillingComponent,
     HomeComponent,
+    PhoneNumbersComponent,
   ],
   imports: [
     BrowserModule,
