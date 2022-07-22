@@ -20,7 +20,7 @@ public class PhoneNumbersService {
 
 
     @Autowired
-	private static PhoneNumbersRepository PhoneNumbersRepository;
+	private PhoneNumbersRepository PhoneNumbersRepository;
 
     
 	public PhoneNumbers addPhoneNumber(PhoneNumbers phoneNumbers ) {
@@ -43,7 +43,7 @@ public class PhoneNumbersService {
 		PhoneNumbersRepository.deletePhoneNumberById(id);
 	}
 
-	public static PhoneNumbers findPhoneNumberById(Long id) {
+	public PhoneNumbers findPhoneNumberById(Long id) {
 		log.info("Getting Phone Number Id: {}", id);
 		return PhoneNumbersRepository.findPhoneNumberById(id)
 				.orElseThrow(() -> new PhoneNumberNotFoundException("Phone with id" + id + " was not found"));

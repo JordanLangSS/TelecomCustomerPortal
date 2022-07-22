@@ -36,7 +36,7 @@ public class PhoneNumbersController {
 
     @GetMapping("/find/{id}")
     public ResponseEntity<PhoneNumbers> findPhoneNumberById(@PathVariable("id") Long id) {
-        PhoneNumbers phoneNumbers = PhoneNumbersService.findPhoneNumberById(id);
+        PhoneNumbers phoneNumbers = phoneNumbersService.findPhoneNumberById(id);
         return new ResponseEntity<>(phoneNumbers, HttpStatus.OK);
     }
 
