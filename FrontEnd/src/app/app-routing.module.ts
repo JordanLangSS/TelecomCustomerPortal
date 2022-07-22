@@ -5,6 +5,7 @@ import { PlansComponent } from './plans/plans.component';
 import { LoginComponent } from './login/login.component';
 import { UserComponent } from './user/user.component';
 import { BillingComponent } from './billing/billing.component';
+import { PhoneNumbersComponent } from './phone-numbers/phone-numbers.component';
 import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
@@ -23,6 +24,9 @@ const routes: Routes = [
   },
   {
     path: 'billing', component: BillingComponent
+  },
+  {
+    path: 'phonenumber', component: PhoneNumbersComponent
   },
   {
     path: '', component: HomeComponent

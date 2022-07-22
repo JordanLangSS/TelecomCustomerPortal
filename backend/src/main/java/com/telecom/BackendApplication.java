@@ -9,8 +9,10 @@ import com.telecom.model.CurrentPlan;
 import com.telecom.model.Device;
 import com.telecom.model.Plan;
 import com.telecom.model.User;
+import com.telecom.model.PhoneNumbers;
 import com.telecom.repository.CurrentPlanRepository;
 import com.telecom.repository.DeviceRepository;
+import com.telecom.repository.PhoneNumbersRepository;
 import com.telecom.repository.PlanRepository;
 import com.telecom.repository.UserRepository;
 
@@ -36,10 +38,10 @@ public class BackendApplication {
 	@Bean
 	CommandLineRunner runDevices(DeviceRepository deviceRepo) {
 		return args -> {
-			deviceRepo.save(new Device(null, "make1", "model1"));
-			deviceRepo.save(new Device(null, "make2", "model2"));
-			deviceRepo.save(new Device(null, "make3", "model3"));
-			deviceRepo.save(new Device(null, "make4", "model4"));
+			deviceRepo.save(new Device(null, "make1", "model1",""));
+			deviceRepo.save(new Device(null, "make2", "model2",""));
+			deviceRepo.save(new Device(null, "make3", "model3",""));
+			deviceRepo.save(new Device(null, "make4", "model4",""));
 
 		};
 	}
@@ -59,6 +61,15 @@ public class BackendApplication {
 		return args -> {
 			currPlanRepo.save(new CurrentPlan(null, 1, 1));
 
+		};
+	}
+
+	@Bean
+	CommandLineRunner runPhoneNumber(PhoneNumbersRepository phoneNumberRepo) {
+		return args -> {
+			phoneNumberRepo.save(new PhoneNumbers(null,"1234"));
+			phoneNumberRepo.save(new PhoneNumbers(null, "12345"));
+			phoneNumberRepo.save(new PhoneNumbers(null, "123456"));
 		};
 	}
 
