@@ -30,4 +30,7 @@ public class Device {
     @NotEmpty(message = "The Phone Plan must have a model")
     private String model;
 
+    @Column
+    private String phoneNumber;
+
 }

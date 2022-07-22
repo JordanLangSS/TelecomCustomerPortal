@@ -38,10 +38,10 @@ public class BackendApplication {
 	@Bean
 	CommandLineRunner runDevices(DeviceRepository deviceRepo) {
 		return args -> {
-			deviceRepo.save(new Device(null, "make1", "model1"));
-			deviceRepo.save(new Device(null, "make2", "model2"));
-			deviceRepo.save(new Device(null, "make3", "model3"));
-			deviceRepo.save(new Device(null, "make4", "model4"));
+			deviceRepo.save(new Device(null, "make1", "model1",""));
+			deviceRepo.save(new Device(null, "make2", "model2",""));
+			deviceRepo.save(new Device(null, "make3", "model3",""));
+			deviceRepo.save(new Device(null, "make4", "model4",""));
 
 		};
 	}
@@ -68,8 +68,8 @@ public class BackendApplication {
 	CommandLineRunner runPhoneNumber(PhoneNumbersRepository phoneNumberRepo) {
 		return args -> {
 			phoneNumberRepo.save(new PhoneNumbers(null,"1234"));
-			phoneNumberRepo.save(new PhoneNumbers(null, "1234"));
-			phoneNumberRepo.save(new PhoneNumbers(null, "1234"));
+			phoneNumberRepo.save(new PhoneNumbers(null, "12345"));
+			phoneNumberRepo.save(new PhoneNumbers(null, "123456"));
 		};
 	}
 
