@@ -39,7 +39,8 @@
                 *ngIf="device.model === '12'"
               />
 
-              <a
+              <button
+                [disabled]="numDevices >= deviceLimit"
                 class="btn btn-primary btn-lg"
                 (click)="onOpenModal(device, 'add')"
                 style="
@@ -48,8 +49,9 @@
                   justify-content: center;
                   align-items: center;
                 "
-                >Add Now</a
               >
+                Add Now
+              </button>
             </div>
           </div>
         </div>
