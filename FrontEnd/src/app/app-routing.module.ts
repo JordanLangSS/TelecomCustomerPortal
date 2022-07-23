@@ -29,6 +29,9 @@ const routes: Routes = [
     path: 'phonenumber', component: PhoneNumbersComponent
   },
   {
+    path: 'devices', component: DevicesComponent
+  },
+  {
     path: '', component: HomeComponent
   },
 
