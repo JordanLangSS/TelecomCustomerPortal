@@ -17,8 +17,8 @@ export class PlansComponent implements OnInit {
   public editPlan: Plan; //plan the user clicking on to add to their current plans
   public deletePlan: Plan; //delete plan when the user clicks delete
 
-  public total = 0;
-  public totalDevices = 0;
+  public total = 0; //total Bill from all the prices from the active plans
+  public totalDevices = 0; //total active devices
   public value;
 
   constructor(private planService: PlanService, private currentPlanService: CurrentPlansService) {}
@@ -27,12 +27,12 @@ export class PlansComponent implements OnInit {
     this.value=data
     this.total = 0; //rest back to zero to avoid double loop
     this.totalDevices = 0;
-    console.log(this.value);  
     for(let j=0;j<data.length;j++){   
          this.total+= this.value[j].price  
          this.totalDevices+= this.value[j].deviceLimit
-
-    }  
+    } 
+    console.log(this.total);
+    console.log(this.totalDevices); 
   } 
 
   public getCurrentPlans(): void {
@@ -93,6 +93,7 @@ export class PlansComponent implements OnInit {
     }
 
 
+    // use this to control which modal shows when a specific button is pressed
   public onOpenModal(plan: Plan, mode: string): void {
     const container = document.getElementById("main-container");
     const button = document.createElement("button");

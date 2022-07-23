@@ -204,7 +204,15 @@ ul li {
     font-weight: bold;
     font-size: 2rem;
     background-color:#BBD6EC;
-}       
+}
+#deleteModalContent {
+  height: 14rem;
+  width: 51rem;
+  font-weight: bold;
+  font-size: 1.7rem;
+  background-color:#BBD6EC;
+
+} 
  
 .modal-title{
   font-size: 2.5rem;
