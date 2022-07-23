@@ -5,7 +5,6 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import com.telecom.model.PhoneNumbers;
@@ -18,12 +17,10 @@ import lombok.extern.slf4j.Slf4j;
 @Transactional
 public class PhoneNumbersService {
 
-
-    @Autowired
+	@Autowired
 	private PhoneNumbersRepository PhoneNumbersRepository;
 
-    
-	public PhoneNumbers addPhoneNumber(PhoneNumbers phoneNumbers ) {
+	public PhoneNumbers addPhoneNumber(PhoneNumbers phoneNumbers) {
 		log.info("Saving new phone number: {}", phoneNumbers.getPhoneNumber());
 		return PhoneNumbersRepository.save(phoneNumbers);
 	}
@@ -35,7 +32,7 @@ public class PhoneNumbersService {
 
 	public PhoneNumbers updatePhoneNumbers(PhoneNumbers phoneNumbers) {
 		log.info("Updating phone number: {}", phoneNumbers.getPhoneNumber());
-		return  PhoneNumbersRepository.save(phoneNumbers);
+		return PhoneNumbersRepository.save(phoneNumbers);
 	}
 
 	public void deletePhoneNumbersById(Long id) {
@@ -48,5 +45,5 @@ public class PhoneNumbersService {
 		return PhoneNumbersRepository.findPhoneNumberById(id)
 				.orElseThrow(() -> new PhoneNumberNotFoundException("Phone with id" + id + " was not found"));
 	}
-    
+
 }

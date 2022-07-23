@@ -1,16 +1,14 @@
 <div class="content mat-elevation-z8">
-  preview selection
-
   <section class="pricing-section">
     <div class="container">
       <div class="row justify-content-md-center">
         <div class="col-xl-5 col-lg-6 col-md-8">
           <div class="section-title text-center title-ex1">
-            <h2>Pricing Tables</h2>
+            <h2>Our Plans!</h2>
           </div>
         </div>
       </div>
-      <!-- Pricing Table starts -->
+      <!---------------------Plans Table---------------------------->
       <div class="container" id="main-container">
         <div class="row">
           <div *ngFor="let plan of plansList" class="col-md-4">
@@ -43,7 +41,7 @@
     </div>
   </section>
 
-  <!-- Add Plan Modal -->
+  <!---------------------Add Plan Modal---------------------------->
   <div
     class="modal fade"
     id="addModal"
@@ -69,6 +67,7 @@
             <div class="form-group">
               <label for="planName">Name</label>
               <input
+                readonly
                 type="text"
                 ngModel="{{ editPlan?.planName }}"
                 name="planName"
@@ -129,7 +128,7 @@
     </div>
   </div>
 
-  <!-- Delete Plan Modal -->
+  <!---------------------Delete Plans Modal---------------------------->
   <div
     class="modal fade"
     id="deletePlanModal"
@@ -138,7 +137,7 @@
     aria-hidden="true"
   >
     <div class="modal-dialog" style="max-height: 80%">
-      <div class="modal-content">
+      <div class="modal-content" id="deleteModalContent">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Delete Plan</h5>
           <button
@@ -177,7 +176,7 @@
     </div>
   </div>
 
-  <!------------------------------------------------->
+  <!---------------------Active Plans Table---------------------------->
   <div class="contain">
     <div class="card">
       <div class="card-header">Active Plans</div>
@@ -191,11 +190,11 @@
               <th>Actions</th>
             </tr>
           </thead>
-          <tbody *ngFor="let plan of plansList">
+          <tbody *ngFor="let currentPlan of currentPlansList">
             <tr>
-              <td>{{ plan.planName }}</td>
-              <td>{{ plan.deviceLimit }}</td>
-              <td>{{ plan.price }}</td>
+              <td>{{ currentPlan.planName }}</td>
+              <td>{{ currentPlan.deviceLimit }}</td>
+              <td>{{ currentPlan.price }}</td>
               <td>
                 <button
                   class="btn btn-primary badge rounded-pill text-bg-primary float-end"
@@ -203,7 +202,7 @@
                   Edit
                 </button>
                 <button
-                  (click)="onOpenModal(plan, 'delete')"
+                  (click)="onOpenModal(currentPlan, 'delete')"
                   class="btn btn-danger badge rounded-pill text-bg-danger float-end"
                 >
                   Delete
@@ -211,6 +210,16 @@
               </td>
             </tr>
           </tbody>
+          <tr>
+            <td><b>Totals</b></td>
+            <td>
+              <b>{{totalDevices}}</b>
+            </td>
+            <td>
+              <b>$ {{total}}</b>
+            </td>
+            <td></td>
+          </tr>
         </table>
       </div>
     </div>

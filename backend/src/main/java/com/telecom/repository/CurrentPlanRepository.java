@@ -1,6 +1,5 @@
 package com.telecom.repository;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,6 +14,6 @@ public interface CurrentPlanRepository extends JpaRepository<CurrentPlan, Long> 
 
     Optional<CurrentPlan> findPlanById(Long id);
 
-    List<CurrentPlan> findPlanByUserId(Long userId);
+    // List<CurrentPlan> findPlanByUserId(Long userId);
 
 }

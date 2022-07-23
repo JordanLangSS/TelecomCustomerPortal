@@ -1,7 +1,9 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
+import { CurrentPlan } from '../Response/currentPlans';
 import { Plan } from '../Response/plans';
 import { PlanService } from '../service/plan.service';
+import { CurrentPlansService } from '../service/current-plans.service';
 
 @Component({
   selector: 'app-plans',
@@ -11,10 +13,41 @@ import { PlanService } from '../service/plan.service';
 export class PlansComponent implements OnInit {
 
   public plansList: Plan[];
+  public currentPlansList: CurrentPlan[];
   public editPlan: Plan; //plan the user clicking on to add to their current plans
   public deletePlan: Plan; //delete plan when the user clicks delete
 
-  constructor(private planService: PlanService) {}
+  public total = 0; //total Bill from all the prices from the active plans
+  public totalDevices = 0; //total active devices
+  public value;
+
+  constructor(private planService: PlanService, private currentPlanService: CurrentPlansService) {}
+
+  public findsum(data){    
+    this.value=data
+    this.total = 0; //rest back to zero to avoid double loop
+    this.totalDevices = 0;
+    for(let j=0;j<data.length;j++){   
+         this.total+= this.value[j].price  
+         this.totalDevices+= this.value[j].deviceLimit
+    } 
+    console.log(this.total);
+    console.log(this.totalDevices); 
+  } 
+
+  public getCurrentPlans(): void {
+    this.currentPlanService.getCurrentPlans().subscribe({
+      next: (response: CurrentPlan[]) => {
+        this.currentPlansList = response;
+        this.findsum(this.currentPlansList); 
+        
+      },
+      error: (error: HttpErrorResponse) => {
+        console.log(error.message);
+        alert(error.message);
+      }
+    });
+  }
 
   public getPlans(): void {
     this.planService.getPlans().subscribe({
@@ -29,13 +62,12 @@ export class PlansComponent implements OnInit {
   }
 
   // use a Form to add a plan to the backend
-  public onAddPlan(plan: Plan): void {
+  public onAddPlan(currentPlan: CurrentPlan): void {
     document.getElementById("add-plan-form").click();
-    this.planService.addPlan(plan).subscribe({
-      next: (response: Plan) => {
+    this.currentPlanService.addCurrentPlan(currentPlan).subscribe({
+      next: (response: CurrentPlan) => {
         console.log(response);
-        this.getPlans(); //call getPlans to re-update list
-        
+        this.getCurrentPlans(); //call getPlans to re-update list
       },
       error: (error: HttpErrorResponse) => {
         console.log(error.message);
@@ -44,15 +76,14 @@ export class PlansComponent implements OnInit {
     });
   }
 
-    // use a Form to add a plan to the backend
+    // use a Form to delete a plan to the backend
     public onDeletePlan(planId: number): void {
       document.getElementById("delete-plan-form").click();
-      this.planService.deletePlan(planId).subscribe({
+      this.currentPlanService.deleteCurrentPlan(planId).subscribe({
         //void because service does not return anything
         next: (response: void) => { 
           console.log(response);
-          this.getPlans(); //call getPlans to re-update list
-          
+          this.getCurrentPlans(); //call getPlans to re-update list
         },
         error: (error: HttpErrorResponse) => {
           console.log(error.message);
@@ -62,6 +93,7 @@ export class PlansComponent implements OnInit {
     }
 
 
+    // use this to control which modal shows when a specific button is pressed
   public onOpenModal(plan: Plan, mode: string): void {
     const container = document.getElementById("main-container");
     const button = document.createElement("button");
@@ -88,6 +120,7 @@ export class PlansComponent implements OnInit {
 
   async ngOnInit() {
     this.getPlans();
+    this.getCurrentPlans();
 
   }
 
