@@ -1,5 +1,6 @@
 package com.telecom;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -23,6 +24,28 @@ public class BackendApplication {
 		SpringApplication.run(BackendApplication.class, args);
 	}
 
+	// @Autowired
+	// PhoneNumbersRepository phoneNumbersRepository;
+
+	// @Autowired
+	// DeviceRepository deviceRepository;
+
+	// @Override
+	// public void run(String... args) throws Exception {
+	// Device device = new Device();
+	// device.setMake("samsung");
+	// device.setModel("Galaxy");
+
+	// PhoneNumbers phoneNumber = new PhoneNumbers();
+	// phoneNumber.setPhoneNumber("2013334444");
+
+	// device.setPhoneNumbers(phoneNumber);
+	// phoneNumber.setDevice(device);
+
+	// // phoneNumbersRepository.save(phoneNumber);
+	// deviceRepository.save(device);
+	// }
+
 	// Use command line runner to execute the queries AFTER Spring Boot has started
 	// Drops all the tables and re-creates them each time due to "ddl-auto: create"
 	// in the application.yml file
@@ -35,13 +58,41 @@ public class BackendApplication {
 		};
 	}
 
+	// @Bean
+	// CommandLineRunner runDevices(DeviceRepository deviceRepo) {
+	// return args -> {
+	// deviceRepo.save(new Device(null, "make1", "model1", ""));
+	// deviceRepo.save(new Device(null, "make2", "model2", ""));
+	// deviceRepo.save(new Device(null, "make3", "model3", ""));
+	// deviceRepo.save(new Device(null, "make4", "model4", ""));
+
+	// };
+	// }
+
 	@Bean
-	CommandLineRunner runDevices(DeviceRepository deviceRepo) {
+	CommandLineRunner runDevices(DeviceRepository deviceRepository, PhoneNumbersRepository phoneNumbersRepository) {
 		return args -> {
-			deviceRepo.save(new Device(null, "make1", "model1",""));
-			deviceRepo.save(new Device(null, "make2", "model2",""));
-			deviceRepo.save(new Device(null, "make3", "model3",""));
-			deviceRepo.save(new Device(null, "make4", "model4",""));
+			Device device1 = new Device();
+			device1.setMake("samsung");
+			device1.setModel("Galaxy");
+
+			PhoneNumbers phoneNumber1 = new PhoneNumbers();
+			phoneNumber1.setPhoneNumber("2015464434");
+			phoneNumber1.setDevice(device1);
+			device1.setPhoneNumbers(phoneNumber1);
+
+			// Phone number 2 *******
+			Device device2 = new Device();
+			device2.setMake("Iphone");
+			device2.setModel("13");
+
+			PhoneNumbers phoneNumber2 = new PhoneNumbers();
+			phoneNumber2.setPhoneNumber("2407809754");
+			phoneNumber2.setDevice(device2);
+			device2.setPhoneNumbers(phoneNumber2);
+
+			deviceRepository.save(device1);
+			deviceRepository.save(device2);
 
 		};
 	}
@@ -64,13 +115,13 @@ public class BackendApplication {
 		};
 	}
 
-	@Bean
-	CommandLineRunner runPhoneNumber(PhoneNumbersRepository phoneNumberRepo) {
-		return args -> {
-			phoneNumberRepo.save(new PhoneNumbers(null,"1234"));
-			phoneNumberRepo.save(new PhoneNumbers(null, "12345"));
-			phoneNumberRepo.save(new PhoneNumbers(null, "123456"));
-		};
-	}
+	// @Bean
+	// CommandLineRunner runPhoneNumber(PhoneNumbersRepository phoneNumberRepo) {
+	// return args -> {
+	// phoneNumberRepo.save(new PhoneNumbers(null,"1234"));
+	// phoneNumberRepo.save(new PhoneNumbers(null, "12345"));
+	// phoneNumberRepo.save(new PhoneNumbers(null, "123456"));
+	// };
+	// }
 
 }

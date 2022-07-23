@@ -1,27 +1,26 @@
 <p>devices works!</p>
 
 <div class="contain">
-    <div class="card">
-      <div class="card-header">Our Devices</div>
-      <div class="card-body">
-        <table class="table table-striped table-hover table-bordered">
-          <thead>
-            <tr>
-              <th>Make</th>
-              <th>Model</th>
-              <th>Phone Number</th>
-            </tr>
-          </thead>
-          <tbody *ngFor="let device of devicesList">
-            <tr>
-              <td>{{device.make}}</td>
-              <td>{{device.model}}</td>
-              <td>{{device.phoneNumber}}</td>
-              <td>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+  <div class="card">
+    <div class="card-header">Our Devices</div>
+    <div class="card-body">
+      <table class="table table-striped table-hover table-bordered">
+        <thead>
+          <tr>
+            <th>Make</th>
+            <th>Model</th>
+            <th>Phone Number</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let device of devicesList">
+          <tr>
+            <td>{{device.make}}</td>
+            <td>{{device.model}}</td>
+            <td>{{(device.phoneNumbers.phoneNumber)}}</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
+</div>
