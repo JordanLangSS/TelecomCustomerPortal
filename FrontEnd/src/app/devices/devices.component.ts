@@ -4,6 +4,7 @@ import { CurrentDevices } from '../Response/currentDevices';
 import { Devices } from '../Response/devices';
 import { CurrentDevicesService } from '../service/current-devices.service';
 import { DevicesService } from '../service/devices.service';
+import { SharedService } from '../service/shared.service';
 
 @Component({
   selector: 'app-devices',
@@ -11,6 +12,10 @@ import { DevicesService } from '../service/devices.service';
   styleUrls: ['./devices.component.css']
 })
 export class DevicesComponent implements OnInit {
+
+  deviceLimit: number; // use to retrieve from the plans table component
+  numDevices: number
+
   
   public devicesList: Devices[];
   public currentDevicesList: CurrentDevices[];
@@ -18,12 +23,22 @@ export class DevicesComponent implements OnInit {
   public addDevice: Devices; //device the user clicking on to add to their current devices
   public deleteDevice: Devices; //delete device when the user clicks delete
 
-  constructor(private DevicesService: DevicesService, private CurrentDevicesService: CurrentDevicesService) {}
+  constructor(private DevicesService: DevicesService, private CurrentDevicesService: CurrentDevicesService, private sharedService: SharedService) {}
+
+
+  public findTotalRows(data){    
+    for(let j=0;j<data.length;j++){ 
+      this.numDevices=j+1;  
+    } 
+    console.log("num Devices: " + this.numDevices);
+  } 
+
 
   public getCurrentDevices(): void {
     this.CurrentDevicesService.getCurrentDevices().subscribe({
       next: (response: CurrentDevices[]) => {
         this.currentDevicesList = response;
+        this.findTotalRows(this.currentDevicesList); 
       },
       error: (error: HttpErrorResponse) => {
         console.log(error.message);
@@ -102,6 +117,8 @@ export class DevicesComponent implements OnInit {
   async ngOnInit() {
     this.getDevices();
     this.getCurrentDevices();
+
+    this.deviceLimit = this.sharedService.getDeviceLimit();
   }
 
 }

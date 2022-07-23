@@ -4,6 +4,7 @@ import { CurrentPlan } from '../Response/currentPlans';
 import { Plan } from '../Response/plans';
 import { PlanService } from '../service/plan.service';
 import { CurrentPlansService } from '../service/current-plans.service';
+import { SharedService } from '../service/shared.service';
 
 @Component({
   selector: 'app-plans',
@@ -21,7 +22,7 @@ export class PlansComponent implements OnInit {
   public totalDevices = 0; //total active devices
   public value;
 
-  constructor(private planService: PlanService, private currentPlanService: CurrentPlansService) {}
+  constructor(private planService: PlanService, private currentPlanService: CurrentPlansService, private sharedService: SharedService) {}
 
   public findsum(data){    
     this.value=data
@@ -31,8 +32,8 @@ export class PlansComponent implements OnInit {
          this.total+= this.value[j].price  
          this.totalDevices+= this.value[j].deviceLimit
     } 
-    console.log(this.total);
-    console.log(this.totalDevices); 
+    //pass the device limit to the devices component
+    this.sharedService.setDeviceLimit(this.totalDevices); 
   } 
 
   public getCurrentPlans(): void {
@@ -115,8 +116,6 @@ export class PlansComponent implements OnInit {
     container.appendChild(button);
     button.click();
   }
-
-  
 
   async ngOnInit() {
     this.getPlans();
