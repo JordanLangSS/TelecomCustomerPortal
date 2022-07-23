@@ -15,6 +15,6 @@ public interface CurrentPlanRepository extends JpaRepository<CurrentPlan, Long> 
 
     Optional<CurrentPlan> findPlanById(Long id);
 
-    List<CurrentPlan> findPlanByUserId(Long userId);
+    // List<CurrentPlan> findPlanByUserId(Long userId);
 
 }

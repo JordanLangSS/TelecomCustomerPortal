@@ -38,8 +38,8 @@ public class CurrentPlanService {
                 .orElseThrow(() -> new PlanNotFoundException("Plan with id" + id + " was not found"));
     }
 
-    public List<CurrentPlan> findPlanByUserId(Long userId) {
-        return currentPlanRepository.findPlanByUserId(userId);
-    }
+    // public List<CurrentPlan> findPlanByUserId(Long userId) {
+    // return currentPlanRepository.findPlanByUserId(userId);
+    // }
 
 }

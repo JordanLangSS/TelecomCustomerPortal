@@ -38,11 +38,12 @@ public class CurrentPlanController {
         return new ResponseEntity<>(plan, HttpStatus.OK);
     }
 
-    @GetMapping("/userid/{userId}")
-    public ResponseEntity<List<CurrentPlan>> getPlanByUserId(@PathVariable("userId") Long userId) {
-        List<CurrentPlan> plans = currentPlanService.findPlanByUserId(userId);
-        return new ResponseEntity<>(plans, HttpStatus.OK);
-    }
+    // @GetMapping("/userid/{userId}")
+    // public ResponseEntity<List<CurrentPlan>>
+    // getPlanByUserId(@PathVariable("userId") Long userId) {
+    // List<CurrentPlan> plans = currentPlanService.findPlanByUserId(userId);
+    // return new ResponseEntity<>(plans, HttpStatus.OK);
+    // }
 
     @PostMapping("/add")
     public ResponseEntity<CurrentPlan> addPlan(@RequestBody CurrentPlan plan) {

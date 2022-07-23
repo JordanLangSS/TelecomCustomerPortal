@@ -191,11 +191,11 @@
               <th>Actions</th>
             </tr>
           </thead>
-          <tbody *ngFor="let plan of plansList">
+          <tbody *ngFor="let currentPlan of currentPlansList">
             <tr>
-              <td>{{ plan.planName }}</td>
-              <td>{{ plan.deviceLimit }}</td>
-              <td>{{ plan.price }}</td>
+              <td>{{ currentPlan.planName }}</td>
+              <td>{{ currentPlan.deviceLimit }}</td>
+              <td>{{ currentPlan.price }}</td>
               <td>
                 <button
                   class="btn btn-primary badge rounded-pill text-bg-primary float-end"
@@ -203,7 +203,7 @@
                   Edit
                 </button>
                 <button
-                  (click)="onOpenModal(plan, 'delete')"
+                  (click)="onOpenModal(currentPlan, 'delete')"
                   class="btn btn-danger badge rounded-pill text-bg-danger float-end"
                 >
                   Delete
@@ -211,6 +211,16 @@
               </td>
             </tr>
           </tbody>
+          <tr>
+            <td><b>Totals</b></td>
+            <td>
+              <b>{{totalDevices}}</b>
+            </td>
+            <td>
+              <b>$ {{total}}</b>
+            </td>
+            <td></td>
+          </tr>
         </table>
       </div>
     </div>

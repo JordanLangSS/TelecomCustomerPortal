@@ -58,16 +58,13 @@ public class BackendApplication {
 		};
 	}
 
-	// @Bean
-	// CommandLineRunner runDevices(DeviceRepository deviceRepo) {
-	// return args -> {
-	// deviceRepo.save(new Device(null, "make1", "model1", ""));
-	// deviceRepo.save(new Device(null, "make2", "model2", ""));
-	// deviceRepo.save(new Device(null, "make3", "model3", ""));
-	// deviceRepo.save(new Device(null, "make4", "model4", ""));
+	@Bean
+	CommandLineRunner runCurrentPlans(CurrentPlanRepository currPlanRepo) {
+		return args -> {
+			currPlanRepo.save(new CurrentPlan(null, "Current Plan number 1", 6, 150.00));
 
-	// };
-	// }
+		};
+	}
 
 	@Bean
 	CommandLineRunner runDevices(DeviceRepository deviceRepository, PhoneNumbersRepository phoneNumbersRepository) {
@@ -107,20 +104,23 @@ public class BackendApplication {
 		};
 	}
 
-	@Bean
-	CommandLineRunner runCurrentPlans(CurrentPlanRepository currPlanRepo) {
-		return args -> {
-			currPlanRepo.save(new CurrentPlan(null, 1, 1));
-
-		};
-	}
-
 	// @Bean
 	// CommandLineRunner runPhoneNumber(PhoneNumbersRepository phoneNumberRepo) {
 	// return args -> {
 	// phoneNumberRepo.save(new PhoneNumbers(null,"1234"));
 	// phoneNumberRepo.save(new PhoneNumbers(null, "12345"));
 	// phoneNumberRepo.save(new PhoneNumbers(null, "123456"));
+	// };
+	// }
+
+	// @Bean
+	// CommandLineRunner runDevices(DeviceRepository deviceRepo) {
+	// return args -> {
+	// deviceRepo.save(new Device(null, "make1", "model1", ""));
+	// deviceRepo.save(new Device(null, "make2", "model2", ""));
+	// deviceRepo.save(new Device(null, "make3", "model3", ""));
+	// deviceRepo.save(new Device(null, "make4", "model4", ""));
+
 	// };
 	// }
 
