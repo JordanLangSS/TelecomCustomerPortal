@@ -1,10 +1,15 @@
 package com.telecom.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotEmpty;
 
 import lombok.AllArgsConstructor;
@@ -30,7 +35,11 @@ public class Device {
     @NotEmpty(message = "The Phone Plan must have a model")
     private String model;
 
-    @Column
+    @Column(name = "phone_number")
     private String phoneNumber;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "pn_id")
+    private PhoneNumbers phoneNumbers;
 
 }
