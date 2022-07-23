@@ -72,18 +72,27 @@ public class BackendApplication {
 	@Bean
 	CommandLineRunner runDevices(DeviceRepository deviceRepository, PhoneNumbersRepository phoneNumbersRepository) {
 		return args -> {
-			Device device = new Device();
-			device.setMake("samsung");
-			device.setModel("Galaxy");
+			Device device1 = new Device();
+			device1.setMake("samsung");
+			device1.setModel("Galaxy");
 
-			PhoneNumbers phoneNumber = new PhoneNumbers();
-			phoneNumber.setPhoneNumber("2013334444");
+			PhoneNumbers phoneNumber1 = new PhoneNumbers();
+			phoneNumber1.setPhoneNumber("2015464434");
+			phoneNumber1.setDevice(device1);
+			device1.setPhoneNumbers(phoneNumber1);
 
-			device.setPhoneNumbers(phoneNumber);
-			phoneNumber.setDevice(device);
+			// Phone number 2 *******
+			Device device2 = new Device();
+			device2.setMake("Iphone");
+			device2.setModel("13");
 
-			// phoneNumbersRepository.save(phoneNumber);
-			deviceRepository.save(device);
+			PhoneNumbers phoneNumber2 = new PhoneNumbers();
+			phoneNumber2.setPhoneNumber("2407809754");
+			phoneNumber2.setDevice(device2);
+			device2.setPhoneNumbers(phoneNumber2);
+
+			deviceRepository.save(device1);
+			deviceRepository.save(device2);
 
 		};
 	}
