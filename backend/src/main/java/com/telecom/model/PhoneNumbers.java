@@ -30,6 +30,6 @@ public class PhoneNumbers {
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "phoneNumbers")
     @JsonIgnore
-    private Device device;
+    private CurrentDevice device;
 
 }
