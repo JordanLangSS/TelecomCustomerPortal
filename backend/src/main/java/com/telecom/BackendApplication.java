@@ -32,19 +32,19 @@ public class BackendApplication {
 	@Bean
 	CommandLineRunner runPlans(PlanRepository planRepo) {
 		return args -> {
-			planRepo.save(new Plan(null, "Plan number 1", 3, 100.00));
-			planRepo.save(new Plan(null, "Plan number 2", 20, 300.00));
-			planRepo.save(new Plan(null, "Plan number 3", 15, 150.00));
+			planRepo.save(new Plan(null, "Silver Plan", 2, 100.00));
+			planRepo.save(new Plan(null, "Gold Plan", 4, 150.00));
+			planRepo.save(new Plan(null, "Platinum Plan", 6, 200.00));
 		};
 	}
 
-	@Bean
-	CommandLineRunner runCurrentPlans(CurrentPlanRepository currPlanRepo) {
-		return args -> {
-			currPlanRepo.save(new CurrentPlan(null, "Current Plan number 1", 6, 150.00));
+	// @Bean
+	// CommandLineRunner runCurrentPlans(CurrentPlanRepository currPlanRepo) {
+	// return args -> {
+	// currPlanRepo.save(new CurrentPlan(null, "Current Plan number 1", 6, 150.00));
 
-		};
-	}
+	// };
+	// }
 
 	@Bean
 	CommandLineRunner runDevices(DeviceRepository deviceRepo) {
@@ -52,9 +52,9 @@ public class BackendApplication {
 			deviceRepo.save(new Device(null, "Iphone", "13"));
 			deviceRepo.save(new Device(null, "Samsung", "Galaxy"));
 			deviceRepo.save(new Device(null, "Pixel", "6"));
-			deviceRepo.save(new Device(null, "Samsung", "Phantom"));
-			deviceRepo.save(new Device(null, "Iphone", "12"));
+			deviceRepo.save(new Device(null, "Samsung", "ZFlip"));
 			deviceRepo.save(new Device(null, "Pixel", "5"));
+			deviceRepo.save(new Device(null, "Iphone", "12"));
 
 		};
 	}
