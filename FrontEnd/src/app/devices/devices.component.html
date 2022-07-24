@@ -1,4 +1,5 @@
 <div class="content mat-elevation-z8">
+  {{registrationForm.value | json}}
   <section class="pricing-section">
     <div class="container">
       <div class="row justify-content-md-center">
@@ -121,13 +122,14 @@
         ></button>
       </div>
       <div class="modal-body">
-        <form #addForm="ngForm">
+        <form [formGroup]="registrationForm" #addForm="ngForm">
           <div class="form-group">
             <label for="make">Make</label>
             <input
-              readonly
-              type="text"
+              formControlName="make"
+              class="form-control"
               ngModel="{{ addDevice?.make }}"
+              type="text"
               name="make"
               class="form-control"
               id="make"
@@ -138,9 +140,9 @@
           <div class="form-group">
             <label for="model">Model</label>
             <input
-              readonly
-              type="number"
+              formControlName="model"
               ngModel="{{ addDevice?.model }}"
+              type="text"
               name="model"
               class="form-control"
               id="model"
@@ -148,18 +150,21 @@
               required
             />
           </div>
-          <!-- <div class="form-group">
-            <label for="phoneNumbers">Phone Number</label>
-            <input
-              type="string"
-              ngModel="{{ addDevice?.phoneNumbers?.phoneNumber}}"
-              name="phoneNumbers"
-              class="form-control"
-              id="phoneNumbers"
-              placeholder="phoneNumbers"
-              required
-            />
-          </div> -->
+          <div formGroupName="phoneNumbers">
+            <div class="form-group">
+              <label for="phoneNumbers">Phone Number</label>
+              <input
+                formControlName="phoneNumber"
+                class="form-control"
+                type="text"
+                name="phoneNumbers"
+                class="form-control"
+                id="phoneNumbers"
+                placeholder="phoneNumbers"
+                required
+              />
+            </div>
+          </div>
 
           <div class="modal-footer">
             <button
@@ -171,7 +176,6 @@
               Close
             </button>
             <button
-              [disabled]="addForm.invalid"
               type="submit"
               class="btn btn-primary"
               (click)="onAddDevice(addForm.value)"

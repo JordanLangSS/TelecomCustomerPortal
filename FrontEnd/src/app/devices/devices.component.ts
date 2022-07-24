@@ -5,6 +5,7 @@ import { Devices } from '../Response/devices';
 import { CurrentDevicesService } from '../service/current-devices.service';
 import { DevicesService } from '../service/devices.service';
 import { SharedService } from '../service/shared.service';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-devices',
@@ -13,13 +14,20 @@ import { SharedService } from '../service/shared.service';
 })
 export class DevicesComponent implements OnInit {
 
+  
+  registrationForm = new FormGroup({
+    make: new FormControl(''),
+    model: new FormControl(''),
+    phoneNumbers: new FormGroup({
+      phoneNumber: new FormControl('')
+    })
+  })
+
   deviceLimit: number; // use to retrieve from the plans table component
   numDevices: number
 
-  
   public devicesList: Devices[];
   public currentDevicesList: CurrentDevices[];
-
   public addDevice: Devices; //device the user clicking on to add to their current devices
   public deleteDevice: Devices; //delete device when the user clicks delete
 
@@ -81,6 +89,7 @@ export class DevicesComponent implements OnInit {
       this.CurrentDevicesService.addCurrentDevices(currentDevice).subscribe({
         next: (response: CurrentDevices) => {
           console.log(response);
+
           this.getCurrentDevices(); //call getDevices to re-update list
         },
         error: (error: HttpErrorResponse) => {
