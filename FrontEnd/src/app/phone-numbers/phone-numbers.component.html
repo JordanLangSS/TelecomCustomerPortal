@@ -1,24 +1,14 @@
-<p>phone-numbers works!</p>
-
 <div class="contain">
-    <div class="card">
-      <div class="card-header">Active Phone Numbers</div>
-      <div class="card-body">
-        <table class="table table-striped table-hover table-bordered">
-          <thead>
-            <tr>
-              <th>Phone Number</th>
-            </tr>
-          </thead>
-          <tbody *ngFor="let phone of phoneNumberList">
-            <tr>
-              <td>{{phone.phoneNumber}}</td>
-              <td>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+  <div class="card">
+    <div class="card-header"><b>Active Phone Numbers</b></div>
+    <div class="card-body">
+      <table class="table table-striped table-hover table-bordered">
+        <tbody *ngFor="let phone of phoneNumberList">
+          <tr>
+            <td>{{phone.phoneNumber}}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
-
+</div>
