@@ -6,11 +6,7 @@
     padding: 16px;
     overflow: auto;
   }
-.contain{
-    margin: auto;
-    padding-top: 100px;
-    width: 40%;
-    }
+
 
     .section-title h2 {
       color: #1d2025;
@@ -154,8 +150,6 @@
   background-color:#BBD6EC;
 
 }
-
-     
     .modal-title{
       font-size: 2.3rem;
     }
@@ -190,4 +184,23 @@
       margin-left: auto;
       margin-right: auto;
       width: 50%;
+    }
+    .contain{
+      margin: auto;
+      padding-top: 100px;
+      width: 40%;
+      }
+
+    td {
+      font-size: 1.8rem;
+      padding: 1rem;
+    }
+    th {
+      font-size: 2.3rem;
+      padding: 1rem;
+    }
+    .card-header {
+      font-size: 3rem;
+      padding: 1.8rem;
+      text-align: center;
     }

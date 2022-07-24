@@ -27,8 +27,8 @@
                 *ngIf="device.model === '6'"
               />
               <img
-                src="../../assets/SamsungPhantomPic.jpg"
-                *ngIf="device.model === 'Phantom'"
+                src="../../assets/SamsungZFlipPic.jpg"
+                *ngIf="device.model === 'ZFlip'"
               />
               <img
                 src="../../assets/Pixel5Pic.jpg"
@@ -62,7 +62,7 @@
   <!---------------------Active Devices Table---------------------------->
   <div class="contain">
     <div class="card">
-      <div class="card-header">Active Devices</div>
+      <div class="card-header"><b>Active Devices</b></div>
       <div class="card-body">
         <table class="table table-striped table-hover table-bordered">
           <thead>
@@ -80,7 +80,7 @@
               <td>{{(currentDevice?.phoneNumbers?.phoneNumber)}}</td>
               <td>
                 <button
-                  class="btn btn-primary badge rounded-pill text-bg-primary float-end"
+                  class="btn btn-primary badge rounded-pill text-bg-primary"
                 >
                   Edit
                 </button>
@@ -111,7 +111,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">
-          Are you sure you want to delete this Device?
+          Are you sure you want to add this Device?
         </h5>
         <button
           type="button"
@@ -206,8 +206,8 @@
       </div>
       <div class="modal-body">
         <p>
-          Are you sure you want to delete this Device:
-          {{ deleteDevice?.make }}? {{ deleteDevice?.model }}?
+          Are you sure you want to delete your
+          {{ deleteDevice?.make }} {{ deleteDevice?.model }}?
         </p>
 
         <div class="modal-footer">
