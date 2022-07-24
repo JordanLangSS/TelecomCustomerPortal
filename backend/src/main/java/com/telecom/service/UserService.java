@@ -29,13 +29,11 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public void deleteUser(Long id) {
-        userRepository.deleteUserById(id);
-    }
+    
 
-    public User findUserByUserName(String userName) {
-        return userRepository.findUserByUserName(userName)
-                .orElseThrow(() -> new PlanNotFoundException("user with username" + userName + " was not found"));
+    public User loginUser(String userName) {
+        return userRepository.findByuserName(userName);
+                
     }
 
     // public User findByEmail(String email) {

@@ -9,11 +9,13 @@ import com.telecom.model.User;
 
 // class name and primary key type
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends JpaRepository<User, String> {
 
-    void deleteUserById(Long id);
+    User findByuserName(String userName);
 
-    Optional<User> findUserByUserName(String userName);
+   
+
+   
 
 }
 
