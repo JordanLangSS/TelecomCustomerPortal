@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
 import lombok.AllArgsConstructor;
@@ -13,6 +14,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data // Generate Getters and Setters
+@Table(name = "loginUsers")
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
@@ -23,7 +25,6 @@ public class User {
     private Long id;
 
     @Column(unique = true)
-    @NotEmpty(message = "The user must have a username")
     private String userName;
 
     @Column

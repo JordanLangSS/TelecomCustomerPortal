@@ -14,17 +14,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.telecom.model.User;
+import com.telecom.repository.UserRepository;
 import com.telecom.service.UserService;
 
+import java.io.Console;
 import java.util.*;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/user")
 @CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private UserRepository repo;
 
     @GetMapping("/all")
     public ResponseEntity<List<User>> findAllUsers() {
@@ -44,16 +48,27 @@ public class UserController {
         return new ResponseEntity<>(updateUser, HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteUser(@PathVariable("id") Long id) {
-        userService.deleteUser(id);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
+    // @DeleteMapping("/delete/{id}")
+    // public ResponseEntity<?> deleteUser(@PathVariable("id") Long id) {
+    // userService.deleteUser(id);
+    // return new ResponseEntity<>(HttpStatus.OK);
+    // }
 
-    @GetMapping("/find/{userName}")
-    public ResponseEntity<User> findUserByUserName(@PathVariable("userName") String userName) {
-        User user = userService.findUserByUserName(userName);
-        return new ResponseEntity<>(user, HttpStatus.OK);
+    // @GetMapping("/find/{userName}")
+    // public ResponseEntity<User> findUserByUserName(@PathVariable("userName")
+    // String userName) {
+    // User user = userService.findUserByUserName(userName);
+    // return new ResponseEntity<>(user, HttpStatus.OK);
+    // }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> loginUser(@RequestBody User userData) {
+        User user = repo.findByuserName(userData.getUserName());
+        System.out.println(userData.getUserName());
+        System.out.println(user);
+        if (user.getPassword().equals(userData.getPassword()))
+            return ResponseEntity.ok(user);
+        return (ResponseEntity<?>) ResponseEntity.internalServerError();
     }
 
 }
