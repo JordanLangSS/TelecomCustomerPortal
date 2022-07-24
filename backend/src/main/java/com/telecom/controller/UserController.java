@@ -50,23 +50,23 @@ public class UserController {
 
     // @DeleteMapping("/delete/{id}")
     // public ResponseEntity<?> deleteUser(@PathVariable("id") Long id) {
-    //     userService.deleteUser(id);
-    //     return new ResponseEntity<>(HttpStatus.OK);
+    // userService.deleteUser(id);
+    // return new ResponseEntity<>(HttpStatus.OK);
     // }
 
     // @GetMapping("/find/{userName}")
-    // public ResponseEntity<User> findUserByUserName(@PathVariable("userName") String userName) {
-    //     User user = userService.findUserByUserName(userName);
-    //     return new ResponseEntity<>(user, HttpStatus.OK);
+    // public ResponseEntity<User> findUserByUserName(@PathVariable("userName")
+    // String userName) {
+    // User user = userService.findUserByUserName(userName);
+    // return new ResponseEntity<>(user, HttpStatus.OK);
     // }
 
-    
     @PostMapping("/login")
-    public ResponseEntity<?> loginUser(@RequestBody User userData){
-        User user = repo.findByuserName("KevinO");
-        System.out.println(userData.getuserName());
+    public ResponseEntity<?> loginUser(@RequestBody User userData) {
+        User user = repo.findByuserName(userData.getUserName());
+        System.out.println(userData.getUserName());
         System.out.println(user);
-        if(user.getPassword().equals(userData.getPassword()))
+        if (user.getPassword().equals(userData.getPassword()))
             return ResponseEntity.ok(user);
         return (ResponseEntity<?>) ResponseEntity.internalServerError();
     }

@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
 
 
   onLogin() {
-    this.user.username = this.loginForm.get('email').value;
+    this.user.userName = this.loginForm.get('email').value;
     this.user.password = shajs('sha256').update(this.loginForm.get('password').value).digest('hex');
     console.log(this.user);
     this.loginuserservice.loginUser(this.user).subscribe(data=>{

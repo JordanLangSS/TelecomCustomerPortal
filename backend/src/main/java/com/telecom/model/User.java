@@ -19,24 +19,17 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class User {
 
-     @Id
-     @GeneratedValue(strategy = GenerationType.AUTO)
-     @Column
-     private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column
+    private Long id;
 
-  
     @Column(unique = true)
     private String userName;
 
     @Column
     @NotEmpty(message = "The user must have a password")
     private String password;
-
-    public String getuserName() {
-        return userName;
-    }
-
-
 
     // @Column(name = "firstname")
     // @NotEmpty(message = "The user must have a first name")
