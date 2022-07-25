@@ -8,6 +8,7 @@
           </div>
         </div>
       </div>
+
       <!---------------------Devices Table---------------------------->
       <div class="container" id="main-container">
         <div class="row">
@@ -80,6 +81,7 @@
               <td>{{(currentDevice?.phoneNumbers?.phoneNumber)}}</td>
               <td>
                 <button
+                  (click)="onOpenModal(currentDevice, 'edit')"
                   class="btn btn-primary badge rounded-pill text-bg-primary"
                 >
                   Edit
@@ -121,13 +123,14 @@
         ></button>
       </div>
       <div class="modal-body">
-        <form #addForm="ngForm">
+        <form [formGroup]="addFormGroup" #addForm="ngForm">
           <div class="form-group">
             <label for="make">Make</label>
             <input
-              readonly
-              type="text"
+              formControlName="make"
+              class="form-control"
               ngModel="{{ addDevice?.make }}"
+              type="text"
               name="make"
               class="form-control"
               id="make"
@@ -138,9 +141,9 @@
           <div class="form-group">
             <label for="model">Model</label>
             <input
-              readonly
-              type="number"
+              formControlName="model"
               ngModel="{{ addDevice?.model }}"
+              type="text"
               name="model"
               class="form-control"
               id="model"
@@ -148,18 +151,21 @@
               required
             />
           </div>
-          <!-- <div class="form-group">
-            <label for="phoneNumbers">Phone Number</label>
-            <input
-              type="string"
-              ngModel="{{ addDevice?.phoneNumbers?.phoneNumber}}"
-              name="phoneNumbers"
-              class="form-control"
-              id="phoneNumbers"
-              placeholder="phoneNumbers"
-              required
-            />
-          </div> -->
+          <div formGroupName="phoneNumbers">
+            <div class="form-group">
+              <label for="phoneNumbers">Phone Number</label>
+              <input
+                formControlName="phoneNumber"
+                class="form-control"
+                type="text"
+                name="phoneNumbers"
+                class="form-control"
+                id="phoneNumbers"
+                placeholder="phoneNumbers"
+                required
+              />
+            </div>
+          </div>
 
           <div class="modal-footer">
             <button
@@ -171,12 +177,116 @@
               Close
             </button>
             <button
-              [disabled]="addForm.invalid"
               type="submit"
               class="btn btn-primary"
               (click)="onAddDevice(addForm.value)"
             >
               Add
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!---------------------edit Device Modal---------------------------->
+<div
+  class="modal fade"
+  id="editModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" style="max-height: 80%">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Device</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="editFormGroup" #editForm="ngForm">
+          <input
+            type="hidden"
+            class="form-control"
+            formControlName="id"
+            ngModel="{{ editDevice?.id }}"
+            name="id"
+            id="id"
+            placeholder="id"
+          />
+          <div class="form-group">
+            <label for="make">Make</label>
+            <input
+              formControlName="make"
+              class="form-control"
+              ngModel="{{ editDevice?.make }}"
+              type="text"
+              name="make"
+              id="make"
+              placeholder="Make"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="model">Model</label>
+            <input
+              formControlName="model"
+              ngModel="{{ editDevice?.model }}"
+              type="text"
+              name="model"
+              class="form-control"
+              id="model"
+              placeholder="Model"
+              required
+            />
+          </div>
+
+          <div formGroupName="phoneNumbers">
+            <input
+              type="hidden"
+              formControlName="id"
+              class="form-control"
+              name="id"
+              id="id"
+              ngModel="{{ editDevice?.phoneNumbers?.id}}"
+              placeholder="id"
+            />
+            <div class="form-group">
+              <label for="phoneNumbers">Phone Number</label>
+              <input
+                formControlName="phoneNumber"
+                class="form-control"
+                type="text"
+                ngModel="{{ editDevice?.phoneNumbers?.phoneNumber}}"
+                name="phoneNumbers"
+                id="phoneNumbers"
+                placeholder="phoneNumbers"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button
+              type="button"
+              id="edit-plan-form"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button
+              type="submit"
+              class="btn btn-primary"
+              (click)="onEditDevice(editForm.value)"
+            >
+              Save
             </button>
           </div>
         </form>
@@ -232,3 +342,34 @@
     </div>
   </div>
 </div>
+
+<!---------------------Error---------------------------->
+<ng-container *ngIf="open_error">
+  <div
+    class="alert alert-danger d-flex alert-dismissible fade show"
+    role="alert"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      fill="currentColor"
+      class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2"
+      viewBox="0 0 16 16"
+      role="img"
+      aria-label="Warning:"
+    >
+      <path
+        d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"
+      />
+    </svg>
+    <strong>That phone number already exists! &nbsp;</strong> Please use a
+    different number or you can choose one later!
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="alert"
+      aria-label="Close"
+    ></button>
+  </div>
+</ng-container>

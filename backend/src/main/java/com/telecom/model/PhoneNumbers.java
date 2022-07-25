@@ -25,7 +25,7 @@ public class PhoneNumbers {
     @Column
     private Long id;
 
-    @Column(name = "phone_number")
+    @Column(name = "phone_number", unique = true)
     private String PhoneNumber;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "phoneNumbers")

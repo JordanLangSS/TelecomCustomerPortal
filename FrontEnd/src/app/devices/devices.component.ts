@@ -5,7 +5,8 @@ import { Devices } from '../Response/devices';
 import { CurrentDevicesService } from '../service/current-devices.service';
 import { DevicesService } from '../service/devices.service';
 import { SharedService } from '../service/shared.service';
-
+import { FormGroup, FormControl } from '@angular/forms';
+var $: any;
 @Component({
   selector: 'app-devices',
   templateUrl: './devices.component.html',
@@ -13,24 +14,42 @@ import { SharedService } from '../service/shared.service';
 })
 export class DevicesComponent implements OnInit {
 
+  
+  addFormGroup = new FormGroup({
+    make: new FormControl(''),
+    model: new FormControl(''),
+    phoneNumbers: new FormGroup({
+      phoneNumber: new FormControl('')
+    })
+  })
+
+  editFormGroup = new FormGroup({
+    id: new FormControl(''),
+    make: new FormControl(''),
+    model: new FormControl(''),
+    phoneNumbers: new FormGroup({
+      id: new FormControl(''),
+      phoneNumber: new FormControl('')
+    })
+  })
+
   deviceLimit: number; // use to retrieve from the plans table component
   numDevices: number
 
-  
   public devicesList: Devices[];
   public currentDevicesList: CurrentDevices[];
-
   public addDevice: Devices; //device the user clicking on to add to their current devices
+  public editDevice: Devices;
   public deleteDevice: Devices; //delete device when the user clicks delete
+  open_error: boolean = false;
+  
 
   constructor(private DevicesService: DevicesService, private CurrentDevicesService: CurrentDevicesService, private sharedService: SharedService) {}
-
 
   public findTotalRows(data){    
     for(let j=0;j<data.length;j++){ 
       this.numDevices=j+1;  
     } 
-    console.log("num Devices: " + this.numDevices);
   } 
 
 
@@ -41,7 +60,6 @@ export class DevicesComponent implements OnInit {
         this.findTotalRows(this.currentDevicesList); 
       },
       error: (error: HttpErrorResponse) => {
-        console.log(error.message);
         alert(error.message);
       }
     });
@@ -53,7 +71,6 @@ export class DevicesComponent implements OnInit {
         this.devicesList = response;
       },
       error: (error: HttpErrorResponse) => {
-        console.log(error.message);
         alert(error.message);
       }
     });
@@ -65,11 +82,9 @@ export class DevicesComponent implements OnInit {
         this.CurrentDevicesService.deleteCurrentDevices(currentDeviceId).subscribe({
           //void because service does not return anything
           next: (response: void) => { 
-            console.log(response);
             this.getCurrentDevices(); //call getPlans to re-update list
           },
           error: (error: HttpErrorResponse) => {
-            console.log(error.message);
             alert(error.message);
           }
         });
@@ -80,15 +95,32 @@ export class DevicesComponent implements OnInit {
       document.getElementById("add-plan-form").click();
       this.CurrentDevicesService.addCurrentDevices(currentDevice).subscribe({
         next: (response: CurrentDevices) => {
-          console.log(response);
           this.getCurrentDevices(); //call getDevices to re-update list
         },
         error: (error: HttpErrorResponse) => {
-          console.log(error.message);
-          alert(error.message);
+          this.open_error = true; 
         }
       });
+      this.open_error = false; 
     }
+
+        // use a Form to add a current device to the backend
+        public onEditDevice(currentDevice: CurrentDevices): void {
+          document.getElementById("edit-plan-form").click();
+          this.CurrentDevicesService.updateCurrentDevices(currentDevice).subscribe({
+            next: (response: CurrentDevices) => {
+              console.log(response)
+              this.getCurrentDevices(); //call getDevices to re-update list
+            },
+            error: (error: HttpErrorResponse) => {
+              this.open_error = true; 
+
+            }
+          });
+          this.open_error = false; 
+        }
+
+    
 
       // use this to control which modal shows when a specific button is pressed
       public onOpenModal(device: Devices, mode: string): void {
@@ -104,6 +136,10 @@ export class DevicesComponent implements OnInit {
           this.addDevice = device;
           button.setAttribute('data-bs-target', '#addModal');
         }
+        if (mode === "edit") {
+          this.editDevice = device;
+          button.setAttribute('data-bs-target', '#editModal');
+        }
         // Open the Delete Modal if the user clicks the delete button
         if (mode === "delete") {
           this.deleteDevice = device;
@@ -112,6 +148,8 @@ export class DevicesComponent implements OnInit {
         container.appendChild(button);
         button.click();
       }
+
+      
 
 
   async ngOnInit() {
