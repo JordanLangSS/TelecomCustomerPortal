@@ -6,7 +6,7 @@ import { CurrentDevicesService } from '../service/current-devices.service';
 import { DevicesService } from '../service/devices.service';
 import { SharedService } from '../service/shared.service';
 import { FormGroup, FormControl } from '@angular/forms';
-
+var $: any;
 @Component({
   selector: 'app-devices',
   templateUrl: './devices.component.html',
@@ -30,15 +30,15 @@ export class DevicesComponent implements OnInit {
   public currentDevicesList: CurrentDevices[];
   public addDevice: Devices; //device the user clicking on to add to their current devices
   public deleteDevice: Devices; //delete device when the user clicks delete
+  open_error: boolean = false;
+  
 
   constructor(private DevicesService: DevicesService, private CurrentDevicesService: CurrentDevicesService, private sharedService: SharedService) {}
-
 
   public findTotalRows(data){    
     for(let j=0;j<data.length;j++){ 
       this.numDevices=j+1;  
     } 
-    console.log("num Devices: " + this.numDevices);
   } 
 
 
@@ -49,7 +49,6 @@ export class DevicesComponent implements OnInit {
         this.findTotalRows(this.currentDevicesList); 
       },
       error: (error: HttpErrorResponse) => {
-        console.log(error.message);
         alert(error.message);
       }
     });
@@ -61,7 +60,6 @@ export class DevicesComponent implements OnInit {
         this.devicesList = response;
       },
       error: (error: HttpErrorResponse) => {
-        console.log(error.message);
         alert(error.message);
       }
     });
@@ -73,11 +71,9 @@ export class DevicesComponent implements OnInit {
         this.CurrentDevicesService.deleteCurrentDevices(currentDeviceId).subscribe({
           //void because service does not return anything
           next: (response: void) => { 
-            console.log(response);
             this.getCurrentDevices(); //call getPlans to re-update list
           },
           error: (error: HttpErrorResponse) => {
-            console.log(error.message);
             alert(error.message);
           }
         });
@@ -88,16 +84,16 @@ export class DevicesComponent implements OnInit {
       document.getElementById("add-plan-form").click();
       this.CurrentDevicesService.addCurrentDevices(currentDevice).subscribe({
         next: (response: CurrentDevices) => {
-          console.log(response);
-
           this.getCurrentDevices(); //call getDevices to re-update list
         },
         error: (error: HttpErrorResponse) => {
-          console.log(error.message);
-          alert(error.message);
+          this.open_error = true; 
         }
       });
+      this.open_error = false; 
     }
+
+    
 
       // use this to control which modal shows when a specific button is pressed
       public onOpenModal(device: Devices, mode: string): void {
@@ -121,6 +117,8 @@ export class DevicesComponent implements OnInit {
         container.appendChild(button);
         button.click();
       }
+
+      
 
 
   async ngOnInit() {
