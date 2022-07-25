@@ -15,10 +15,20 @@ var $: any;
 export class DevicesComponent implements OnInit {
 
   
-  registrationForm = new FormGroup({
+  addFormGroup = new FormGroup({
     make: new FormControl(''),
     model: new FormControl(''),
     phoneNumbers: new FormGroup({
+      phoneNumber: new FormControl('')
+    })
+  })
+
+  editFormGroup = new FormGroup({
+    id: new FormControl(''),
+    make: new FormControl(''),
+    model: new FormControl(''),
+    phoneNumbers: new FormGroup({
+      id: new FormControl(''),
       phoneNumber: new FormControl('')
     })
   })
@@ -29,6 +39,7 @@ export class DevicesComponent implements OnInit {
   public devicesList: Devices[];
   public currentDevicesList: CurrentDevices[];
   public addDevice: Devices; //device the user clicking on to add to their current devices
+  public editDevice: Devices;
   public deleteDevice: Devices; //delete device when the user clicks delete
   open_error: boolean = false;
   
@@ -93,6 +104,22 @@ export class DevicesComponent implements OnInit {
       this.open_error = false; 
     }
 
+        // use a Form to add a current device to the backend
+        public onEditDevice(currentDevice: CurrentDevices): void {
+          document.getElementById("edit-plan-form").click();
+          this.CurrentDevicesService.updateCurrentDevices(currentDevice).subscribe({
+            next: (response: CurrentDevices) => {
+              console.log(response)
+              this.getCurrentDevices(); //call getDevices to re-update list
+            },
+            error: (error: HttpErrorResponse) => {
+              this.open_error = true; 
+
+            }
+          });
+          this.open_error = false; 
+        }
+
     
 
       // use this to control which modal shows when a specific button is pressed
@@ -108,6 +135,10 @@ export class DevicesComponent implements OnInit {
         if (mode === "add") {
           this.addDevice = device;
           button.setAttribute('data-bs-target', '#addModal');
+        }
+        if (mode === "edit") {
+          this.editDevice = device;
+          button.setAttribute('data-bs-target', '#editModal');
         }
         // Open the Delete Modal if the user clicks the delete button
         if (mode === "delete") {
