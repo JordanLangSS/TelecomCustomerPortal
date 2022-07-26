@@ -6,6 +6,8 @@ import { CurrentDevicesService } from '../service/current-devices.service';
 import { DevicesService } from '../service/devices.service';
 import { SharedService } from '../service/shared.service';
 import { FormGroup, FormControl } from '@angular/forms';
+import { PhoneNumbersService } from '../service/phone-numbers.service';
+import { PhoneNumber } from '../Response/phoneNumbers';
 var $: any;
 @Component({
   selector: 'app-devices',
@@ -14,12 +16,13 @@ var $: any;
 })
 export class DevicesComponent implements OnInit {
 
+  nullValue = null;
   
   addFormGroup = new FormGroup({
     make: new FormControl(''),
     model: new FormControl(''),
     phoneNumbers: new FormGroup({
-      phoneNumber: new FormControl('')
+      phoneNumber: new FormControl(null)
     })
   })
 
@@ -29,7 +32,7 @@ export class DevicesComponent implements OnInit {
     model: new FormControl(''),
     phoneNumbers: new FormGroup({
       id: new FormControl(''),
-      phoneNumber: new FormControl('')
+      phoneNumber: new FormControl(null)
     })
   })
 
@@ -38,20 +41,20 @@ export class DevicesComponent implements OnInit {
 
   public devicesList: Devices[];
   public currentDevicesList: CurrentDevices[];
+  public phoneNumberList: PhoneNumber[];
   public addDevice: Devices; //device the user clicking on to add to their current devices
   public editDevice: Devices;
   public deleteDevice: Devices; //delete device when the user clicks delete
   open_error: boolean = false;
   
 
-  constructor(private DevicesService: DevicesService, private CurrentDevicesService: CurrentDevicesService, private sharedService: SharedService) {}
+  constructor(private DevicesService: DevicesService, private CurrentDevicesService: CurrentDevicesService, private sharedService: SharedService, private PhoneNumbersService: PhoneNumbersService) {}
 
   public findTotalRows(data){    
     for(let j=0;j<data.length;j++){ 
       this.numDevices=j+1;  
     } 
   } 
-
 
   public getCurrentDevices(): void {
     this.CurrentDevicesService.getCurrentDevices().subscribe({
@@ -71,6 +74,18 @@ export class DevicesComponent implements OnInit {
         this.devicesList = response;
       },
       error: (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    });
+  }
+
+  public getPhoneNumbers(): void {
+    this.PhoneNumbersService.getPhoneNumber().subscribe({
+      next: (response: PhoneNumber[]) => {
+        this.phoneNumberList = response;
+      },
+      error: (error: HttpErrorResponse) => {
+        console.log(error.message);
         alert(error.message);
       }
     });
@@ -135,6 +150,7 @@ export class DevicesComponent implements OnInit {
         if (mode === "add") {
           this.addDevice = device;
           button.setAttribute('data-bs-target', '#addModal');
+          this.getPhoneNumbers();
         }
         if (mode === "edit") {
           this.editDevice = device;
@@ -155,6 +171,7 @@ export class DevicesComponent implements OnInit {
   async ngOnInit() {
     this.getDevices();
     this.getCurrentDevices();
+    this.getPhoneNumbers();
 
     this.deviceLimit = this.sharedService.getDeviceLimit();
   }
