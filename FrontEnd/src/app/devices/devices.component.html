@@ -182,11 +182,12 @@
 
               <select formControlName="phoneNumber">
                 <option>{{nullValue}}</option>
-                <option *ngFor="let phone of phoneNumberList">
-                  <ng-container *ngIf="phone?.phoneNumber">
+                <ng-container *ngFor="let phone of phoneNumberList">
+                  <option *ngIf="phone?.phoneNumber">
                     {{phone?.phoneNumber}}
-                  </ng-container>
-                </option>
+                  </option>
+                </ng-container>
+               
               </select>
 
               <!-- <input
