@@ -7,7 +7,7 @@ import { UserComponent } from './user/user.component';
 import { BillingComponent } from './billing/billing.component';
 import { PhoneNumbersComponent } from './phone-numbers/phone-numbers.component';
 import { HomeComponent } from './home/home.component';
-import { AuthGuardService } from './service/auth-gaurd.service';
+import { AuthGuardService } from './service/auth-guard.service';
 
 const routes: Routes = [
 
