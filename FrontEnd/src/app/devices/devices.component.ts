@@ -5,36 +5,41 @@ import { Devices } from '../Response/devices';
 import { CurrentDevicesService } from '../service/current-devices.service';
 import { DevicesService } from '../service/devices.service';
 import { SharedService } from '../service/shared.service';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { PhoneNumbersService } from '../service/phone-numbers.service';
 import { PhoneNumber } from '../Response/phoneNumbers';
-var $: any;
 @Component({
   selector: 'app-devices',
   templateUrl: './devices.component.html',
   styleUrls: ['./devices.component.css']
 })
+
 export class DevicesComponent implements OnInit {
 
-  nullValue = null;
+  constructor(private fb: FormBuilder, private DevicesService: DevicesService, private CurrentDevicesService: CurrentDevicesService, private sharedService: SharedService, private PhoneNumbersService: PhoneNumbersService) {}
   
-  addFormGroup = new FormGroup({
-    make: new FormControl(''),
-    model: new FormControl(''),
-    phoneNumbers: new FormGroup({
-      phoneNumber: new FormControl(null)
+
+  
+  nullValue = null;
+
+  addFormGroup: FormGroup = this.fb.group({
+    make: [''],
+    model: [''],
+    phoneNumbers: this.fb.group({
+      phoneNumber: [null, [ Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]], 
     })
   })
 
-  editFormGroup = new FormGroup({
-    id: new FormControl(''),
-    make: new FormControl(''),
-    model: new FormControl(''),
-    phoneNumbers: new FormGroup({
-      id: new FormControl(''),
-      phoneNumber: new FormControl(null)
+  editFormGroup: FormGroup = this.fb.group({
+    id: [''],
+    make: [''],
+    model: [''],
+    phoneNumbers: this.fb.group({
+      id: [''],
+      phoneNumber: [null, [ Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]], 
     })
   })
+
 
   deviceLimit: number; // use to retrieve from the plans table component
   numDevices: number
@@ -47,8 +52,7 @@ export class DevicesComponent implements OnInit {
   public deleteDevice: Devices; //delete device when the user clicks delete
   open_error: boolean = false;
   
-
-  constructor(private DevicesService: DevicesService, private CurrentDevicesService: CurrentDevicesService, private sharedService: SharedService, private PhoneNumbersService: PhoneNumbersService) {}
+  
 
   public findTotalRows(data){    
     for(let j=0;j<data.length;j++){ 
@@ -155,6 +159,7 @@ export class DevicesComponent implements OnInit {
         if (mode === "edit") {
           this.editDevice = device;
           button.setAttribute('data-bs-target', '#editModal');
+          this.getPhoneNumbers();          
         }
         // Open the Delete Modal if the user clicks the delete button
         if (mode === "delete") {
@@ -165,8 +170,6 @@ export class DevicesComponent implements OnInit {
         button.click();
       }
 
-      
-
 
   async ngOnInit() {
     this.getDevices();
@@ -174,6 +177,10 @@ export class DevicesComponent implements OnInit {
     this.getPhoneNumbers();
 
     this.deviceLimit = this.sharedService.getDeviceLimit();
+
+
   }
 
 }
+
+

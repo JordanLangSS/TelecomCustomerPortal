@@ -148,6 +148,7 @@
         <form [formGroup]="addFormGroup" #addForm="ngForm">
           <div class="form-group">
             <label for="make">Make</label>
+
             <input
               readonly
               formControlName="make"
@@ -189,6 +190,12 @@
               </select> -->
 
               <input
+                [(ngModel)]="addFormGroup"
+                nullValue
+                [class.is-invalid]="
+                  addFormGroup.get('phoneNumbers.phoneNumber').invalid &&
+                  addFormGroup.get('phoneNumbers.phoneNumber').touched
+                "
                 formControlName="phoneNumber"
                 class="form-control"
                 type="text"
@@ -303,6 +310,10 @@
               </select> -->
               <input
                 formControlName="phoneNumber"
+                [class.is-invalid]="
+                  editFormGroup.get('phoneNumbers.phoneNumber').invalid &&
+                  editFormGroup.get('phoneNumbers.phoneNumber').touched
+                "
                 class="form-control"
                 type="text"
                 ngModel="{{ editDevice?.phoneNumbers?.phoneNumber}}"
