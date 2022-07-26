@@ -176,7 +176,7 @@
               required
             />
           </div>
-          <div formGroupName="phoneNumbers">
+          <!-- <div formGroupName="phoneNumbers">
             <div class="form-group">
               <label for="phoneNumbers">Phone Number</label>
 
@@ -187,10 +187,9 @@
                     {{phone?.phoneNumber}}
                   </option>
                 </ng-container>
-               
-              </select>
+              </select> -->
 
-              <!-- <input
+          <!-- <input
                 [class.is-invalid]="
                   addFormGroup.get('phoneNumbers.phoneNumber').invalid &&
                   addFormGroup.get('phoneNumbers.phoneNumber').touched
@@ -204,8 +203,8 @@
                 placeholder="phoneNumbers"
                 required
               /> -->
-            </div>
-          </div>
+          <!-- </div>
+          </div> -->
 
           <div class="modal-footer">
             <button
@@ -304,6 +303,7 @@
                 <option>{{nullValue}}</option>
                 <option *ngFor="let phone of phoneNumberList">
                   <ng-container *ngIf="phone?.phoneNumber">
+                    {{phone?.id}}
                     {{phone?.phoneNumber}}
                   </ng-container>
                 </option>

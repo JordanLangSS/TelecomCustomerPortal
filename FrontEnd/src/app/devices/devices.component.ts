@@ -34,9 +34,9 @@ export class DevicesComponent implements OnInit {
   addFormGroup: FormGroup = this.fb.group({
     make: [''],
     model: [''],
-    phoneNumbers: this.fb.group({
-      phoneNumber: [null, [ Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]], 
-    })
+    // phoneNumbers: this.fb.group({
+    //   phoneNumber: [null, [ Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]], 
+    // })
   })
 
   editFormGroup: FormGroup = this.fb.group({
@@ -44,7 +44,7 @@ export class DevicesComponent implements OnInit {
     make: [''],
     model: [''],
     phoneNumbers: this.fb.group({
-      id: [''],
+      id: [null],
       phoneNumber: [null, [ Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]], 
     })
   })
@@ -109,9 +109,9 @@ export class DevicesComponent implements OnInit {
       document.getElementById("add-plan-form").click();
 
       //If the user enters an empty string, just change it to null
-      if (currentDevice.phoneNumbers.phoneNumber === ''){
-        currentDevice.phoneNumbers.phoneNumber = null;
-      }
+      // if (currentDevice.phoneNumbers.phoneNumber === ''){
+      //   currentDevice.phoneNumbers.phoneNumber = null;
+      // }
 
       this.CurrentDevicesService.addCurrentDevices(currentDevice).subscribe({
         next: (response: CurrentDevices) => {
@@ -129,9 +129,9 @@ export class DevicesComponent implements OnInit {
           document.getElementById("edit-plan-form").click();
 
         //If the user enters an empty string, just change it to null
-        if (currentDevice.phoneNumbers.phoneNumber === ''){
-          currentDevice.phoneNumbers.phoneNumber = null;
-        }
+        // if (currentDevice.phoneNumbers.phoneNumber === ''){
+        //   currentDevice.phoneNumbers.phoneNumber = null;
+        // }
           this.CurrentDevicesService.updateCurrentDevices(currentDevice).subscribe({
             next: (response: CurrentDevices) => {
               console.log(response)
@@ -176,7 +176,7 @@ export class DevicesComponent implements OnInit {
 
       // Reset the add form if the close button is pressed
       public onCloseAdd(){
-        this.addFormGroup.get('phoneNumbers.phoneNumber').setValue(null);
+        // this.addFormGroup.get('phoneNumbers.phoneNumber').setValue(null);
         this.addFormGroup.markAsPristine();
         this.addFormGroup.markAsUntouched();
         this.addFormGroup.updateValueAndValidity();
