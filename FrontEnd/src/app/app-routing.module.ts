@@ -30,9 +30,6 @@ const routes: Routes = [
     path: 'phonenumber', component: PhoneNumbersComponent, canActivate:[AuthGuardService]
   },
   {
-    path: 'devices', component: DevicesComponent, canActivate:[AuthGuardService]
-  },
-  {
     path: '', component: HomeComponent
   },
 
