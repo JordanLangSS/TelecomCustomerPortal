@@ -28,7 +28,7 @@ public class PhoneNumbers {
     @Column(name = "phone_number", unique = true)
     private String PhoneNumber;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "phoneNumbers")
+    @OneToOne(mappedBy = "phoneNumbers", cascade = CascadeType.ALL)
     @JsonIgnore
     private CurrentDevice device;
 

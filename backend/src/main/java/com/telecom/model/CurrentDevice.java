@@ -37,7 +37,7 @@ public class CurrentDevice {
     // @Column(name = "phone_number")
     // private String phoneNumber;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "pn_id")
     private PhoneNumbers phoneNumbers;
 }

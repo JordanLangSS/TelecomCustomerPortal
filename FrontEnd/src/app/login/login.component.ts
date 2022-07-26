@@ -31,12 +31,13 @@ export class LoginComponent implements OnInit {
 
 
   onLogin() {
-    
      this.user.userName = this.loginForm.get('email').value;
      this.user.password = shajs('sha256').update(this.loginForm.get('password').value).digest('hex');
      const userName = this.user.userName;
      const password = this.user.password;
      this.authService.login(userName, password);
+
+   
 
   }
 

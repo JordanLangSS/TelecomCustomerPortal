@@ -1,4 +1,26 @@
 <div class="content mat-elevation-z8">
+  <!---------------------Drop Down---------------------------->
+  <!-- <div class="dropdown">
+    <a
+      class="btn btn-secondary dropdown-toggle"
+      href="#"
+      role="button"
+      id="dropdownMenuLink"
+      data-bs-toggle="dropdown"
+      aria-expanded="false"
+    >
+      Dropdown link
+    </a>
+
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+      <li>
+        <a class="dropdown-item" href="#" *ngFor="let phone of phoneNumberList">
+          {{phone.phoneNumber}}</a
+        >
+      </li>
+    </ul>
+  </div> -->
+  <!---------------------Drop Down---------------------------->
   <section class="pricing-section">
     <div class="container">
       <div class="row justify-content-md-center">
@@ -126,7 +148,9 @@
         <form [formGroup]="addFormGroup" #addForm="ngForm">
           <div class="form-group">
             <label for="make">Make</label>
+
             <input
+              readonly
               formControlName="make"
               class="form-control"
               ngModel="{{ addDevice?.make }}"
@@ -141,6 +165,7 @@
           <div class="form-group">
             <label for="model">Model</label>
             <input
+              readonly
               formControlName="model"
               ngModel="{{ addDevice?.model }}"
               type="text"
@@ -154,7 +179,21 @@
           <div formGroupName="phoneNumbers">
             <div class="form-group">
               <label for="phoneNumbers">Phone Number</label>
+
+              <!-- <select formControlName="phoneNumber">
+                <option>{{nullValue}}</option>
+                <option *ngFor="let phone of phoneNumberList">
+                  <ng-container *ngIf="phone?.phoneNumber">
+                    {{phone?.phoneNumber}}
+                  </ng-container>
+                </option>
+              </select> -->
+
               <input
+                [class.is-invalid]="
+                  addFormGroup.get('phoneNumbers.phoneNumber').invalid &&
+                  addFormGroup.get('phoneNumbers.phoneNumber').touched
+                "
                 formControlName="phoneNumber"
                 class="form-control"
                 type="text"
@@ -259,8 +298,20 @@
             />
             <div class="form-group">
               <label for="phoneNumbers">Phone Number</label>
+              <!-- <select formControlName="phoneNumber">
+                <option>{{nullValue}}</option>
+                <option *ngFor="let phone of phoneNumberList">
+                  <ng-container *ngIf="phone?.phoneNumber">
+                    {{phone?.phoneNumber}}
+                  </ng-container>
+                </option>
+              </select> -->
               <input
                 formControlName="phoneNumber"
+                [class.is-invalid]="
+                  editFormGroup.get('phoneNumbers.phoneNumber').invalid &&
+                  editFormGroup.get('phoneNumbers.phoneNumber').touched
+                "
                 class="form-control"
                 type="text"
                 ngModel="{{ editDevice?.phoneNumbers?.phoneNumber}}"
