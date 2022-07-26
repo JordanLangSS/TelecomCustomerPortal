@@ -41,11 +41,13 @@ export class LoginComponent implements OnInit {
     if (!this.loginForm.valid) {
       return;
     }
+
     // if (shajs('sha256').update(this.loginForm.get('password').value).digest('hex') )
     // console.log(this.loginForm.get('email').value);
     // console.log(this.loginForm.get('password').value);
     // console.log(shajs('sha256').update(this.loginForm.get('password').value).digest('hex'));
     // console.log(this.loginForm.value); //both values together
+
   }
 
 }
