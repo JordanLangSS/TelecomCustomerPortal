@@ -7,29 +7,30 @@ import { UserComponent } from './user/user.component';
 import { BillingComponent } from './billing/billing.component';
 import { PhoneNumbersComponent } from './phone-numbers/phone-numbers.component';
 import { HomeComponent } from './home/home.component';
+import { AuthGuardService } from './service/auth-gaurd.service';
 
 const routes: Routes = [
 
   {
-    path: 'user', component: UserComponent
+    path: 'user', component: UserComponent, canActivate:[AuthGuardService]
   },
   {
-    path: 'plans', component: PlansComponent
+    path: 'plans', component: PlansComponent, canActivate:[AuthGuardService]
   },
   {
-    path: 'devices', component: DevicesComponent
+    path: 'devices', component: DevicesComponent, canActivate:[AuthGuardService]
   },
   {
     path: 'login', component: LoginComponent
   },
   {
-    path: 'billing', component: BillingComponent
+    path: 'billing', component: BillingComponent, canActivate:[AuthGuardService]
   },
   {
-    path: 'phonenumber', component: PhoneNumbersComponent
+    path: 'phonenumber', component: PhoneNumbersComponent, canActivate:[AuthGuardService]
   },
   {
-    path: 'devices', component: DevicesComponent
+    path: 'devices', component: DevicesComponent, canActivate:[AuthGuardService]
   },
   {
     path: '', component: HomeComponent
