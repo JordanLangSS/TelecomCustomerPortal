@@ -5,13 +5,16 @@
         <P>Sign Into Your Account </P>
       </div>
       <form (ngSubmit)="onLogin()" name="loginForm" [formGroup]="loginForm">
+        
         <div class="emailInput">
           <mat-form-field class="full-width" appearance="outline">
-            <mat-label>Email</mat-label>
+            <mat-label>Email or Username</mat-label>
+           
             <input
               formControlName="email"
               matInput
               placeholder="Enter email address"
+              
               required
             />
 
