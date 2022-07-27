@@ -34,10 +34,10 @@ public class CurrentDevice {
     @NotNull(message = "The current device must have a model")
     private String model;
 
-    // @Column(name = "phone_number")
-    // private String phoneNumber;
+    @Column(name = "phone_number", unique = true)
+    private String phoneNumber;
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "pn_id")
-    private PhoneNumbers phoneNumbers;
+    // @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    // @JoinColumn(name = "pn_id")
+    // private PhoneNumbers phoneNumbers;
 }
