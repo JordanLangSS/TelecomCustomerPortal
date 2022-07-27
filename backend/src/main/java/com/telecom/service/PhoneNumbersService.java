@@ -46,4 +46,8 @@ public class PhoneNumbersService {
 				.orElseThrow(() -> new PhoneNumberNotFoundException("Phone with id" + id + " was not found"));
 	}
 
+	public List<PhoneNumbers> findUserPhoneNumById(Long id) {
+		return PhoneNumbersRepository.findUserPhoneNumById(id);
+	}
+
 }

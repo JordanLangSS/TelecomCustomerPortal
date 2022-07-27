@@ -63,9 +63,7 @@ public class UserController {
 
     @GetMapping("/id")
     public Long findUserId(User user) {
-        //List<User> users = userService.findAllUsers();
         Long id = user.getId();
-        //System.out.println(id);
         return id;
     }
 
@@ -73,10 +71,11 @@ public class UserController {
     public ResponseEntity<?> loginUser(@RequestBody User userData) {
         User user = repo.findByuserName(userData.getUserName());
         System.out.println(userData.getUserName());
-        //System.out.println(user.getId());
+        System.out.println(user);
+
         if (user.getPassword().equals(userData.getPassword()))
             System.out.println(findUserId(user));
-            return ResponseEntity.ok(findUserId(user));
+        return ResponseEntity.ok(findUserId(user));
     }
 
 }

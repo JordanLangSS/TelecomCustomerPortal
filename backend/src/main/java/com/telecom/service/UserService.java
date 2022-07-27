@@ -29,13 +29,10 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    
-
     public User loginUser(String userName) {
-        return userRepository.findByuserName(userName);         
+        return userRepository.findByuserName(userName);
+
     }
-
-
 
     // public User findByEmail(String email) {
     // log.info("Getting user email: {}", email);

@@ -3,7 +3,7 @@
     <div class="card-header"><b>Active Phone Numbers</b></div>
     <div class="card-body">
       <table class="table table-striped table-hover table-bordered">
-        <tbody *ngFor="let phone of phoneNumberList">
+        <tbody *ngFor="let phone of userPhoneNumberList">
           <tr *ngIf="phone?.phoneNumber">
             <td>{{phone?.phoneNumber}}</td>
             <!-- <td>

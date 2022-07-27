@@ -3,39 +3,51 @@ import { User } from '../Response/user';
 import { LoginService } from './login.service';
 import * as shajs from 'sha.js';
 import { of } from 'rxjs';
+import { SharedService } from './shared.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
+  id: number;
 
   private isloggedIn: boolean;
   user: User = new User();
 
-  constructor(private loginuserService: LoginService) {
-    this.isloggedIn=false;
-   }
+  constructor(
+    private loginuserService: LoginService,
+    private sharedService: SharedService
+  ) {
+    this.isloggedIn = false;
+  }
 
-   login(userName: string, password: string){
+  login(userName: string, password: string) {
     this.user.userName = userName;
     this.user.password = password;
-    console.log(this.user);
-    this.loginuserService.loginUser(this.user).subscribe(data=>{
-      this.isloggedIn=true;
-      console.log(data);
-      const id = data;
-      console.log(id);
-      alert("Login Successful");
-      return of(this.isloggedIn);
-      
-    },error=>alert("Sorry, please enter correct Username and Password"));
-   }
+    this.loginuserService.loginUser(this.user).subscribe(
+      (data) => {
+        this.isloggedIn = true;
+        console.log(data);
+        //const tempUser = data;
+        //pass the userId to the other components to use
+        this.sharedService.setUserId(data);
 
-   isUserLoggedIn(): boolean{
+        alert('Login Successful');
+        return of(this.isloggedIn);
+      },
+      (error) => {
+        console.log(this.user);
+        alert('Sorry, please enter correct Username and Password');
+      }
+    );
+    console.log('userId is: ' + this.sharedService.getUserId());
+  }
+
+  isUserLoggedIn(): boolean {
     return this.isloggedIn;
-   }
+  }
 
-   logoutUser(): void{
+  logoutUser(): void {
     this.isloggedIn = false;
-}
+  }
 }

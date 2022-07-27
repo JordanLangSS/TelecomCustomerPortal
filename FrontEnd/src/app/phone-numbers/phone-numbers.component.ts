@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { PhoneNumber } from '../Response/phoneNumbers';
 import { PhoneNumbersService } from '../service/phone-numbers.service';
+import { SharedService } from '../service/shared.service';
 
 @Component({
   selector: 'app-phone-numbers',
@@ -10,10 +11,32 @@ import { PhoneNumbersService } from '../service/phone-numbers.service';
 })
 export class PhoneNumbersComponent implements OnInit {
   public phoneNumberList: PhoneNumber[];
+  public userPhoneNumberList: PhoneNumber[];
   public editPhoneNumber: PhoneNumber;
   public deletePhoneNumber: PhoneNumber;
-  constructor(private PhoneNumbersService: PhoneNumbersService) {}
+  userId = 10;
 
+  constructor(
+    private PhoneNumbersService: PhoneNumbersService,
+    private sharedService: SharedService
+  ) {}
+
+  //////////////////////////////////////////////////////////////////////////////
+  public getUserPhoneNumbers(): void {
+    this.PhoneNumbersService.getUserPhoneNumbers(
+      this.sharedService.getUserId()
+    ).subscribe({
+      next: (response: PhoneNumber[]) => {
+        this.userPhoneNumberList = response;
+        console.log(this.userId);
+      },
+      error: (error: HttpErrorResponse) => {
+        console.log(error.message);
+        alert(error.message);
+      },
+    });
+  }
+  ///////////////////////////////////////////////////////////////////////////////
   public getPhoneNumbers(): void {
     this.PhoneNumbersService.getPhoneNumber().subscribe({
       next: (response: PhoneNumber[]) => {
@@ -59,5 +82,9 @@ export class PhoneNumbersComponent implements OnInit {
 
   async ngOnInit() {
     this.getPhoneNumbers();
+    this.getUserPhoneNumbers();
+
+    this.userId = this.sharedService.getUserId();
+    console.log(this.userId);
   }
 }
