@@ -7,7 +7,7 @@ import { UserComponent } from './user/user.component';
 import { BillingComponent } from './billing/billing.component';
 import { PhoneNumbersComponent } from './phone-numbers/phone-numbers.component';
 import { HomeComponent } from './home/home.component';
-import { AuthGuardService } from './service/auth-gaurd.service';
+import { AuthGuardService } from './service/auth-guard.service';
 
 const routes: Routes = [
 
@@ -18,7 +18,7 @@ const routes: Routes = [
     path: 'plans', component: PlansComponent, canActivate:[AuthGuardService]
   },
   {
-    path: 'devices', component: DevicesComponent//, canActivate:[AuthGuardService]
+    path: 'devices', component: DevicesComponent, canActivate:[AuthGuardService]
   },
   {
     path: 'login', component: LoginComponent
@@ -27,7 +27,7 @@ const routes: Routes = [
     path: 'billing', component: BillingComponent, canActivate:[AuthGuardService]
   },
   {
-    path: 'phonenumber', component: PhoneNumbersComponent//, canActivate:[AuthGuardService]
+    path: 'phonenumber', component: PhoneNumbersComponent, canActivate:[AuthGuardService]
   },
   {
     path: '', component: HomeComponent
