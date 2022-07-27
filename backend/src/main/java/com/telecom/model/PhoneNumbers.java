@@ -28,8 +28,8 @@ public class PhoneNumbers {
     @Column(name = "phone_number", unique = true)
     private String PhoneNumber;
 
-    @OneToOne(mappedBy = "phoneNumbers", cascade = CascadeType.ALL)
-    @JsonIgnore
-    private CurrentDevice device;
+    // @OneToOne(mappedBy = "phoneNumbers", cascade = CascadeType.ALL)
+    // @JsonIgnore
+    // private CurrentDevice device;
 
 }
