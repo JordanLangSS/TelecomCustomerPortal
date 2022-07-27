@@ -75,7 +75,7 @@ public class UserController {
 
         if (user.getPassword().equals(userData.getPassword()))
             System.out.println(findUserId(user));
-        return ResponseEntity.ok(user);
+        return ResponseEntity.ok(findUserId(user));
     }
 
 }

@@ -13,14 +13,20 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity
-@Data // Generate Getters and Setters
+@Getter
+@Setter
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -38,8 +44,8 @@ public class User {
     @NotEmpty(message = "The user must have a password")
     private String password;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "user", orphanRemoval = true)
+    @JsonManagedReference
+    @OneToMany(mappedBy = "user")
     private Set<PhoneNumbers> phoneNumbers;
 
     // @Column(name = "firstname")

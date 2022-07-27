@@ -9,7 +9,7 @@ import com.telecom.model.User;
 
 // class name and primary key type
 @Repository
-public interface UserRepository extends JpaRepository<User, String> {
+public interface UserRepository extends JpaRepository<User, Long> {
 
     User findByuserName(String userName);
 

@@ -23,7 +23,9 @@ export class PhoneNumbersComponent implements OnInit {
 
   //////////////////////////////////////////////////////////////////////////////
   public getUserPhoneNumbers(): void {
-    this.PhoneNumbersService.getUserPhoneNumbers(this.userId).subscribe({
+    this.PhoneNumbersService.getUserPhoneNumbers(
+      this.sharedService.getUserId()
+    ).subscribe({
       next: (response: PhoneNumber[]) => {
         this.userPhoneNumberList = response;
         console.log(this.userId);

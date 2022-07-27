@@ -35,7 +35,10 @@ export class AuthService {
         alert('Login Successful');
         return of(this.isloggedIn);
       },
-      (error) => alert('Sorry, please enter correct Username and Password')
+      (error) => {
+        console.log(this.user);
+        alert('Sorry, please enter correct Username and Password');
+      }
     );
     console.log('userId is: ' + this.sharedService.getUserId());
   }
