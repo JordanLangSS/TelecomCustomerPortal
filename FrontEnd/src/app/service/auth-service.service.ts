@@ -22,6 +22,9 @@ export class AuthService {
     console.log(this.user);
     this.loginuserService.loginUser(this.user).subscribe(data=>{
       this.isloggedIn=true;
+      console.log(data);
+      const id = data;
+      console.log(id);
       alert("Login Successful");
       return of(this.isloggedIn);
       
