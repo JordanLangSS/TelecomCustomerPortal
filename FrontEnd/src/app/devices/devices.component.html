@@ -1,26 +1,5 @@
 <div class="content mat-elevation-z8">
   <!---------------------Drop Down---------------------------->
-  <!-- <div class="dropdown">
-    <a
-      class="btn btn-secondary dropdown-toggle"
-      href="#"
-      role="button"
-      id="dropdownMenuLink"
-      data-bs-toggle="dropdown"
-      aria-expanded="false"
-    >
-      Dropdown link
-    </a>
-
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-      <li>
-        <a class="dropdown-item" href="#" *ngFor="let phone of phoneNumberList">
-          {{phone.phoneNumber}}</a
-        >
-      </li>
-    </ul>
-  </div> -->
-  <!---------------------Drop Down---------------------------->
   <section class="pricing-section">
     <div class="container">
       <div class="row justify-content-md-center">
@@ -81,7 +60,7 @@
       </div>
     </div>
   </section>
-
+  <div>this phoneNumId is: {{phoneNumId}}</div>
   <!---------------------Active Devices Table---------------------------->
   <div class="contain">
     <div class="card">
@@ -98,21 +77,74 @@
           </thead>
           <tbody *ngFor="let currentDevice of currentDevicesList">
             <tr>
-              <td>{{currentDevice.make}}</td>
-              <td>{{currentDevice.model}}</td>
-              <td>{{(currentDevice?.phoneNumbers?.phoneNumber)}}</td>
+              <td>{{currentDevice?.make}}</td>
+              <td>{{currentDevice?.model}}</td>
+              <td>
+                {{(currentDevice?.phoneNumber)}}
+
+                <button
+                  *ngIf="currentDevice?.phoneNumber"
+                  (click)="NullOurPhoneNum(currentDevice)"
+                  type="button"
+                  class="btn btn-outline-danger"
+                >
+                  Remove
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-telephone"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"
+                    />
+                  </svg>
+                  #
+                </button>
+              </td>
               <td>
                 <button
                   (click)="onOpenModal(currentDevice, 'edit')"
-                  class="btn btn-primary badge rounded-pill text-bg-primary"
+                  type="button"
+                  class="btn btn-primary"
                 >
-                  Edit
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-pencil-square"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
+                    />
+                    <path
+                      fill-rule="evenodd"
+                      d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
+                    />
+                  </svg>
                 </button>
+
                 <button
                   (click)="onOpenModal(currentDevice, 'delete')"
-                  class="btn btn-danger badge rounded-pill text-bg-danger float-end"
+                  type="button"
+                  class="btn btn-outline-danger"
                 >
-                  Delete
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-trash3-fill"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"
+                    />
+                  </svg>
                 </button>
               </td>
             </tr>
@@ -287,28 +319,27 @@
             />
           </div>
 
-          <div formGroupName="phoneNumbers">
-            <input
+          <!-- <input
               type="hidden"
               formControlName="id"
               class="form-control"
               name="id"
               id="id"
-              ngModel="{{ editDevice?.phoneNumbers?.id}}"
+              ngModel="{{phoneNumId}}"
               placeholder="id"
-            />
-            <div class="form-group">
-              <label for="phoneNumbers">Phone Number</label>
-              <select formControlName="phoneNumber">
-                <option>{{nullValue}}</option>
-                <option *ngFor="let phone of phoneNumberList">
-                  <ng-container *ngIf="phone?.phoneNumber">
-                    {{phone?.id}}
-                    {{phone?.phoneNumber}}
-                  </ng-container>
-                </option>
-              </select>
-              <!-- <input
+            /> -->
+          <!-- ngModel="{{ editDevice?.phoneNumbers?.id}}" -->
+          <div class="form-group">
+            <label for="phoneNumbers">Phone Number</label>
+            <select formControlName="phoneNumber">
+              <option>{{nullValue}}</option>
+              <option *ngFor="let phone of phoneNumberList">
+                <ng-container *ngIf="phone?.phoneNumber">
+                  {{phone?.phoneNumber}}
+                </ng-container>
+              </option>
+            </select>
+            <!-- <input
                 formControlName="phoneNumber"
                 [class.is-invalid]="
                   editFormGroup.get('phoneNumbers.phoneNumber').invalid &&
@@ -322,7 +353,6 @@
                 placeholder="phoneNumbers"
                 required
               /> -->
-            </div>
           </div>
 
           <div class="modal-footer">
