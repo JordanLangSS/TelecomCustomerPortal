@@ -1,4 +1,5 @@
-export interface PhoneNumber{
-    id: number;
-    phoneNumber: string;
+export interface PhoneNumber {
+  id: number;
+  phoneNumber: string;
+  userId: number;
 }

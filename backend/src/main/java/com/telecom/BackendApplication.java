@@ -93,21 +93,25 @@ public class BackendApplication {
 	CommandLineRunner runUsers(UserRepository userRepo) {
 		return args -> {
 			userRepo.save(
-					new User(null, "JordanL", "0b14d501a594442a01c6859541bcb3e8164d183d32937b851835442f69d5c94e"));
-			userRepo.save(new User(null, "KevinO", "6cf615d5bcaac778352a8f1f3360d23f02f34ec182e259897fd6ce485d7870d4"));
+					new User(null, "JordanL", "0b14d501a594442a01c6859541bcb3e8164d183d32937b851835442f69d5c94e",
+							null));
 			userRepo.save(
-					new User(null, "firstName3", "5906ac361a137e2d286465cd6588ebb5ac3f5ae955001100bc41577c3d751764"));
+					new User(null, "KevinO", "6cf615d5bcaac778352a8f1f3360d23f02f34ec182e259897fd6ce485d7870d4", null));
 			userRepo.save(
-					new User(null, "firstName4", "b97873a40f73abedd8d685a7cd5e5f85e4a9cfb83eac26886640a0813850122b"));
+					new User(null, "firstName3", "5906ac361a137e2d286465cd6588ebb5ac3f5ae955001100bc41577c3d751764",
+							null));
+			userRepo.save(
+					new User(null, "firstName4", "b97873a40f73abedd8d685a7cd5e5f85e4a9cfb83eac26886640a0813850122b",
+							null));
 		};
 	}
 
 	@Bean
 	CommandLineRunner runPhoneNumber(PhoneNumbersRepository phoneNumberRepo) {
 		return args -> {
-			phoneNumberRepo.save(new PhoneNumbers(null, "1234"));
-			phoneNumberRepo.save(new PhoneNumbers(null, "12345"));
-			phoneNumberRepo.save(new PhoneNumbers(null, "123456"));
+			phoneNumberRepo.save(new PhoneNumbers(null, "1234", null));
+			phoneNumberRepo.save(new PhoneNumbers(null, "12345", null));
+			phoneNumberRepo.save(new PhoneNumbers(null, "123456", null));
 		};
 	}
 

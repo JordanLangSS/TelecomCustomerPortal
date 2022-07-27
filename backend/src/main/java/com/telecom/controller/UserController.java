@@ -61,14 +61,21 @@ public class UserController {
     // return new ResponseEntity<>(user, HttpStatus.OK);
     // }
 
+    @GetMapping("/id")
+    public Long findUserId(User user) {
+        Long id = user.getId();
+        return id;
+    }
+
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestBody User userData) {
         User user = repo.findByuserName(userData.getUserName());
         System.out.println(userData.getUserName());
         System.out.println(user);
+
         if (user.getPassword().equals(userData.getPassword()))
-            return ResponseEntity.ok(user);
-        return (ResponseEntity<?>) ResponseEntity.internalServerError();
+            System.out.println(findUserId(user));
+        return ResponseEntity.ok(user);
     }
 
 }

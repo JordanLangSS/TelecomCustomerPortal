@@ -157,7 +157,6 @@ export class DevicesComponent implements OnInit {
     // }
 
     //if (!this.phoneNumberList.includes(this.temp.phoneNumber)) {
-    //console.log("we're good...it's not in the list of numbers")
     //currentDevice.phoneNumbers.phoneNumber = this.temp.phoneNumber;
     //}
 

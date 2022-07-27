@@ -6,7 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -27,6 +28,10 @@ public class PhoneNumbers {
 
     @Column(name = "phone_number", unique = true)
     private String PhoneNumber;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
 
     // @OneToOne(mappedBy = "phoneNumbers", cascade = CascadeType.ALL)
     // @JsonIgnore

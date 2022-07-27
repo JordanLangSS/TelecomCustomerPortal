@@ -13,10 +13,6 @@ public interface UserRepository extends JpaRepository<User, String> {
 
     User findByuserName(String userName);
 
-   
-
-   
-
 }
 
 // tell JPA to use a select with "findBY"
