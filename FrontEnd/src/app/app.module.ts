@@ -11,7 +11,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatTableModule} from '@angular/material/table';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -57,7 +57,8 @@ import { PhoneNumbersComponent } from './phone-numbers/phone-numbers.component';
     ReactiveFormsModule,
     MatProgressBarModule,
     MatTableModule,
-    FormsModule
+    FormsModule,
+    NgbModule
 
  
   ],
