@@ -17,8 +17,8 @@ const routes: Routes = [
   },
   {
     path: 'plans',
-    component: PlansComponent,
-    canActivate: [AuthGuardService],
+    component: PlansComponent, //,
+    // canActivate: [AuthGuardService],
   },
   {
     path: 'devices',

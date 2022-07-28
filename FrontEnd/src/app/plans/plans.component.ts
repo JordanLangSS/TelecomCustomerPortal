@@ -21,6 +21,7 @@ export class PlansComponent implements OnInit {
   public total = 0; //total Bill from all the prices from the active plans
   public totalDevices = 0; //total active devices
   public value;
+  open_error: boolean = false;
 
   constructor(
     private planService: PlanService,
@@ -64,9 +65,11 @@ export class PlansComponent implements OnInit {
         this.findsum(this.currentPlansList);
       },
       error: (error: HttpErrorResponse) => {
-        alert(error.message);
+        this.open_error = true;
+        //alert(error.message);
       },
     });
+    this.open_error = false;
   }
 
   public getPlans(): void {
@@ -88,9 +91,11 @@ export class PlansComponent implements OnInit {
         this.getCurrentPlans(); //call getPlans to re-update list
       },
       error: (error: HttpErrorResponse) => {
-        alert(error.message);
+        this.open_error = true;
+        //alert(error.message);
       },
     });
+    this.open_error = false;
   }
 
   // use a Form to delete a plan to the backend
