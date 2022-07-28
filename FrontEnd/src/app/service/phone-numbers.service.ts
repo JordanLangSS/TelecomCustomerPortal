@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { PhoneNumber } from '../Response/phoneNumbers';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PhoneNumbersService {
-  private apiServeUrl = 'http://localhost:8080';
+  private apiServeUrl = environment.Url;
 
   constructor(private http: HttpClient) {}
 
