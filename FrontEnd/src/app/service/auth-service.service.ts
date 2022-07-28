@@ -4,6 +4,7 @@ import { LoginService } from './login.service';
 import * as shajs from 'sha.js';
 import { of } from 'rxjs';
 import { SharedService } from './shared.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,8 @@ export class AuthService {
 
   constructor(
     private loginuserService: LoginService,
-    private sharedService: SharedService
+    private sharedService: SharedService,
+    private router: Router
   ) {
     this.isloggedIn = false;
   }
@@ -31,6 +33,7 @@ export class AuthService {
         //pass the userId to the other components to use
         this.sharedService.setUserId(data);
 
+        this.router.navigate(['plans']);
         alert('Login Successful');
         return of(this.isloggedIn);
       },
