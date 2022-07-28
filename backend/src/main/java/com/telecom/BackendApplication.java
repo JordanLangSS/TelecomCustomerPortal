@@ -2,13 +2,11 @@ package com.telecom;
 
 import java.util.HashSet;
 import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-
 import com.telecom.model.CurrentDevice;
 import com.telecom.model.CurrentPlan;
 import com.telecom.model.Device;
@@ -60,14 +58,14 @@ public class BackendApplication {
 		return args -> {
 			User userJordan = new User(null, "JordanL",
 					"0b14d501a594442a01c6859541bcb3e8164d183d32937b851835442f69d5c94e",
-					null, null);
+					null, null, null);
 			User userKevin = new User(null, "KevinO",
 					"6cf615d5bcaac778352a8f1f3360d23f02f34ec182e259897fd6ce485d7870d4",
-					null, null);
+					null, null, null);
 			User user3 = new User(null, "firstName3",
-					"5906ac361a137e2d286465cd6588ebb5ac3f5ae955001100bc41577c3d751764", null, null);
+					"5906ac361a137e2d286465cd6588ebb5ac3f5ae955001100bc41577c3d751764", null, null, null);
 			User user4 = new User(null, "firstName4",
-					"b97873a40f73abedd8d685a7cd5e5f85e4a9cfb83eac26886640a0813850122b", null, null);
+					"b97873a40f73abedd8d685a7cd5e5f85e4a9cfb83eac26886640a0813850122b", null, null, null);
 
 			userRepo.save(userJordan);
 			userRepo.save(userKevin);
@@ -88,7 +86,5 @@ public class BackendApplication {
 
 		};
 	}
-
-
 
 }

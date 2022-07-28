@@ -31,6 +31,7 @@ export class DevicesComponent implements OnInit {
 
   public devicesList: Devices[];
   public currentDevicesList: CurrentDevices[];
+  public userCurrentDevicesList: CurrentDevices[];
   public phoneNumberList: PhoneNumber[];
   public userPhoneNumberList: PhoneNumber[];
   public addDevice: Devices; //device the user clicking on to add to their current devices
@@ -91,6 +92,21 @@ export class DevicesComponent implements OnInit {
         this.devicesList = response;
       },
       error: (error: HttpErrorResponse) => {
+        alert(error.message);
+      },
+    });
+  }
+
+  //use this to get the current user devices
+  public getUserCurrentDevices(): void {
+    this.CurrentDevicesService.getUserCurrentPlans(
+      this.sharedService.getUserId()
+    ).subscribe({
+      next: (response: CurrentDevices[]) => {
+        this.userCurrentDevicesList = response;
+      },
+      error: (error: HttpErrorResponse) => {
+        console.log(error.message);
         alert(error.message);
       },
     });
@@ -207,6 +223,7 @@ export class DevicesComponent implements OnInit {
     this.getCurrentDevices();
     this.getPhoneNumbers();
     this.getUserPhoneNumbers();
+    //this.getUserCurrentDevices();
 
     this.userId = this.sharedService.getUserId();
     this.deviceLimit = this.sharedService.getDeviceLimit();

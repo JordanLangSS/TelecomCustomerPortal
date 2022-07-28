@@ -43,7 +43,7 @@ export class PlansComponent implements OnInit {
   }
 
   //////////////////////////////////////////////////////////////////////////////
-  //use this to get the current user plans (however is not used due to no implementation with adding/deleting current user plans)
+  //use this to get the current user plans
   public getUserCurrentPlans(): void {
     this.currentPlanService
       .getUserCurrentPlans(this.sharedService.getUserId())

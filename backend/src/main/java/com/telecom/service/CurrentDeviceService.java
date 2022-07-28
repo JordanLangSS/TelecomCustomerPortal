@@ -33,4 +33,8 @@ public class CurrentDeviceService {
         return currentDeviceRepository.findCurrentDeviceById(id)
                 .orElseThrow(() -> new PlanNotFoundException("Device with id" + id + " was not found"));
     }
+
+    public List<CurrentDevice> findUserCurrentDevicesById(Long id) {
+        return currentDeviceRepository.findUserCurrentDevicesById(id);
+    }
 }
