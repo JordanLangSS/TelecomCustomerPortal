@@ -37,7 +37,7 @@ public class PhoneNumbers {
     private String PhoneNumber;
 
     @JsonBackReference
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 

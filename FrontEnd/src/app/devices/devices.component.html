@@ -60,7 +60,7 @@
       </div>
     </div>
   </section>
-  
+
   <!---------------------Active Devices Table---------------------------->
   <div class="contain">
     <div class="card">
@@ -104,11 +104,12 @@
                   #
                 </button>
               </td>
-              <td>
+              <td align="center">
                 <button
                   (click)="onOpenModal(currentDevice, 'edit')"
                   type="button"
-                  class="btn btn-primary"
+                  class="btn btn-primary float-right"
+                  style="margin: 1rem"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -131,7 +132,7 @@
                 <button
                   (click)="onOpenModal(currentDevice, 'delete')"
                   type="button"
-                  class="btn btn-outline-danger"
+                  class="btn btn-outline-danger float-right"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -333,7 +334,7 @@
             <label for="phoneNumbers">Phone Number</label>
             <select formControlName="phoneNumber">
               <option>{{nullValue}}</option>
-              <option *ngFor="let phone of phoneNumberList">
+              <option *ngFor="let phone of userPhoneNumberList">
                 <ng-container *ngIf="phone?.phoneNumber">
                   {{phone?.phoneNumber}}
                 </ng-container>

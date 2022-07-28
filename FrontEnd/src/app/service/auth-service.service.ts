@@ -27,8 +27,7 @@ export class AuthService {
     this.loginuserService.loginUser(this.user).subscribe(
       (data) => {
         this.isloggedIn = true;
-        console.log(data);
-        //const tempUser = data;
+
         //pass the userId to the other components to use
         this.sharedService.setUserId(data);
 
@@ -36,11 +35,9 @@ export class AuthService {
         return of(this.isloggedIn);
       },
       (error) => {
-        console.log(this.user);
         alert('Sorry, please enter correct Username and Password');
       }
     );
-    console.log('userId is: ' + this.sharedService.getUserId());
   }
 
   isUserLoggedIn(): boolean {

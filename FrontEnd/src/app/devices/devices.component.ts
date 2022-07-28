@@ -31,9 +31,11 @@ export class DevicesComponent implements OnInit {
   public devicesList: Devices[];
   public currentDevicesList: CurrentDevices[];
   public phoneNumberList: PhoneNumber[];
+  public userPhoneNumberList: PhoneNumber[];
   public addDevice: Devices; //device the user clicking on to add to their current devices
   public editDevice: Devices;
   public deleteDevice: Devices; //delete device when the user clicks delete
+  userId: number;
   open_error: boolean = false;
 
   nullValue = null;
@@ -61,11 +63,9 @@ export class DevicesComponent implements OnInit {
 
     this.CurrentDevicesService.updateCurrentDevices(currentDevice).subscribe({
       next: (response: CurrentDevices) => {
-        console.log(response);
         this.getCurrentDevices(); //call getDevices to re-update list
       },
       error: (error: HttpErrorResponse) => {
-        console.log(error);
         this.open_error = true;
       },
     });
@@ -100,6 +100,20 @@ export class DevicesComponent implements OnInit {
       },
     });
   }
+  ///////////////////////////////////////////////////////////////////
+  public getUserPhoneNumbers(): void {
+    this.PhoneNumbersService.getUserPhoneNumbers(
+      this.sharedService.getUserId()
+    ).subscribe({
+      next: (response: PhoneNumber[]) => {
+        this.userPhoneNumberList = response;
+      },
+      error: (error: HttpErrorResponse) => {
+        alert(error.message);
+      },
+    });
+  }
+  ///////////////////////////////////////////////////////////////////
 
   public getPhoneNumbers(): void {
     this.PhoneNumbersService.getPhoneNumber().subscribe({
@@ -107,7 +121,6 @@ export class DevicesComponent implements OnInit {
         this.phoneNumberList = response;
       },
       error: (error: HttpErrorResponse) => {
-        console.log(error.message);
         alert(error.message);
       },
     });
@@ -162,11 +175,9 @@ export class DevicesComponent implements OnInit {
 
     this.CurrentDevicesService.updateCurrentDevices(currentDevice).subscribe({
       next: (response: CurrentDevices) => {
-        console.log(response);
         this.getCurrentDevices(); //call getDevices to re-update list
       },
       error: (error: HttpErrorResponse) => {
-        console.log(error);
         this.open_error = true;
       },
     });
@@ -214,7 +225,9 @@ export class DevicesComponent implements OnInit {
     this.getDevices();
     this.getCurrentDevices();
     this.getPhoneNumbers();
+    this.getUserPhoneNumbers();
 
+    this.userId = this.sharedService.getUserId();
     this.deviceLimit = this.sharedService.getDeviceLimit();
   }
 }
