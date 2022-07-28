@@ -17,12 +17,13 @@ const routes: Routes = [
   },
   {
     path: 'plans',
-    component: PlansComponent, //,
-    // canActivate: [AuthGuardService],
+    component: PlansComponent,
+    canActivate: [AuthGuardService],
   },
   {
     path: 'devices',
-    component: DevicesComponent, //, canActivate:[AuthGuardService]
+    component: DevicesComponent,
+    canActivate: [AuthGuardService],
   },
   {
     path: 'login',
@@ -35,7 +36,8 @@ const routes: Routes = [
   },
   {
     path: 'phonenumber',
-    component: PhoneNumbersComponent, //, canActivate:[AuthGuardService]
+    component: PhoneNumbersComponent,
+    canActivate: [AuthGuardService],
   },
   {
     path: '',

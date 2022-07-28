@@ -1,15 +1,11 @@
 package com.telecom.service;
 
 import java.util.List;
-
 import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.telecom.model.PhoneNumbers;
 import com.telecom.repository.PhoneNumbersRepository;
-
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j // log to see what is happening

@@ -12,10 +12,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.telecom.model.CurrentDevice;
 import com.telecom.service.CurrentDeviceService;
-
 import java.util.*;
 
 @RestController

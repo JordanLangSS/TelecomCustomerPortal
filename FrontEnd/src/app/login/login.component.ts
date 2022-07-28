@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 import { User } from '../Response/user';
 import * as shajs from 'sha.js';
-import { UserComponent } from '../user/user.component';
 import { LoginService } from '../service/login.service';
 import { AuthService } from '../service/auth-service.service';
 
