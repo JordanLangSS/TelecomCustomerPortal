@@ -16,6 +16,7 @@ import { PhoneNumber } from '../Response/phoneNumbers';
 export class DevicesComponent implements OnInit {
   phoneNumId: any;
   temp: any;
+  public userName: String;
 
   constructor(
     private fb: FormBuilder,
@@ -209,5 +210,6 @@ export class DevicesComponent implements OnInit {
 
     this.userId = this.sharedService.getUserId();
     this.deviceLimit = this.sharedService.getDeviceLimit();
+    this.userName = this.sharedService.getUserName();
   }
 }
