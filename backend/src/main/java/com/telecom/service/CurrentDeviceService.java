@@ -1,12 +1,9 @@
 package com.telecom.service;
 
 import java.util.List;
-
 import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.telecom.model.CurrentDevice;
 import com.telecom.repository.CurrentDeviceRepository;
 

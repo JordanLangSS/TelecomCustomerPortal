@@ -1,21 +1,22 @@
 package com.telecom.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
-@Data // Generate Getters and Setters
+
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class PhoneNumbers {
@@ -28,8 +29,9 @@ public class PhoneNumbers {
     @Column(name = "phone_number", unique = true)
     private String PhoneNumber;
 
-    // @OneToOne(mappedBy = "phoneNumbers", cascade = CascadeType.ALL)
-    // @JsonIgnore
-    // private CurrentDevice device;
+    @JsonBackReference
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
 
 }

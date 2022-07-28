@@ -1,23 +1,30 @@
 package com.telecom.model;
 
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
-
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
-@Data // Generate Getters and Setters
-@Table(name = "loginUsers")
+@Getter
+@Setter
+
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
+
+    public User(Long id, String userName, String password) {
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,16 +38,12 @@ public class User {
     @NotEmpty(message = "The user must have a password")
     private String password;
 
-    // @Column(name = "firstname")
-    // @NotEmpty(message = "The user must have a first name")
-    // private String firstName;
+    @JsonManagedReference
+    @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = { CascadeType.ALL })
+    private Set<PhoneNumbers> phoneNumbers;
 
-    // @Column(name = "lastname")
-    // @NotEmpty(message = "The user must have a last name")
-    // private String lastName;
-
-    // @Column
-    // @NotEmpty(message = "The user must have an email")
-    // private String email;
+    @JsonManagedReference
+    @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = { CascadeType.ALL })
+    private Set<CurrentPlan> currentPlans;
 
 }

@@ -1,12 +1,9 @@
 package com.telecom.service;
 
 import java.util.List;
-
 import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.telecom.model.CurrentPlan;
 import com.telecom.repository.CurrentPlanRepository;
 
@@ -38,8 +35,8 @@ public class CurrentPlanService {
                 .orElseThrow(() -> new PlanNotFoundException("Plan with id" + id + " was not found"));
     }
 
-    // public List<CurrentPlan> findPlanByUserId(Long userId) {
-    // return currentPlanRepository.findPlanByUserId(userId);
-    // }
+    public List<CurrentPlan> findUserCurrentPlansById(Long id) {
+        return currentPlanRepository.findUserCurrentPlansById(id);
+    }
 
 }

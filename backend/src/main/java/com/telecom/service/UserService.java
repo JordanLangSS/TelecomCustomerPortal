@@ -1,12 +1,9 @@
 package com.telecom.service;
 
 import java.util.List;
-
 import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.telecom.model.User;
 import com.telecom.repository.UserRepository;
 
@@ -29,17 +26,9 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    
-
     public User loginUser(String userName) {
-        return userRepository.findByuserName(userName);         
+        return userRepository.findByuserName(userName);
+
     }
-
-
-
-    // public User findByEmail(String email) {
-    // log.info("Getting user email: {}", email);
-    // return userRepository.findByEmail(email);
-    // }
 
 }

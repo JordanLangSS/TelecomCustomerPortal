@@ -15,7 +15,7 @@
         <div class="row">
           <div *ngFor="let device of devicesList" class="col-md-4">
             <div class="price-card">
-              <h2>{{device.make}} {{device.model}}</h2>
+              <h2>{{ device.make }} {{ device.model }}</h2>
               <img
                 src="../../assets/SamsungGalaxyPic.jpg"
                 *ngIf="device.model === 'Galaxy'"
@@ -60,7 +60,7 @@
       </div>
     </div>
   </section>
-  
+
   <!---------------------Active Devices Table---------------------------->
   <div class="contain">
     <div class="card">
@@ -77,10 +77,10 @@
           </thead>
           <tbody *ngFor="let currentDevice of currentDevicesList">
             <tr>
-              <td>{{currentDevice?.make}}</td>
-              <td>{{currentDevice?.model}}</td>
+              <td>{{ currentDevice?.make }}</td>
+              <td>{{ currentDevice?.model }}</td>
               <td>
-                {{(currentDevice?.phoneNumber)}}
+                {{ currentDevice?.phoneNumber }}
 
                 <button
                   *ngIf="currentDevice?.phoneNumber"
@@ -104,11 +104,12 @@
                   #
                 </button>
               </td>
-              <td>
+              <td align="center">
                 <button
                   (click)="onOpenModal(currentDevice, 'edit')"
                   type="button"
-                  class="btn btn-primary"
+                  class="btn btn-primary float-right"
+                  style="margin: 1rem"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -131,7 +132,7 @@
                 <button
                   (click)="onOpenModal(currentDevice, 'delete')"
                   type="button"
-                  class="btn btn-outline-danger"
+                  class="btn btn-outline-danger float-right"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -208,35 +209,6 @@
               required
             />
           </div>
-          <!-- <div formGroupName="phoneNumbers">
-            <div class="form-group">
-              <label for="phoneNumbers">Phone Number</label>
-
-              <select formControlName="phoneNumber">
-                <option>{{nullValue}}</option>
-                <ng-container *ngFor="let phone of phoneNumberList">
-                  <option *ngIf="phone?.phoneNumber">
-                    {{phone?.phoneNumber}}
-                  </option>
-                </ng-container>
-              </select> -->
-
-          <!-- <input
-                [class.is-invalid]="
-                  addFormGroup.get('phoneNumbers.phoneNumber').invalid &&
-                  addFormGroup.get('phoneNumbers.phoneNumber').touched
-                "
-                formControlName="phoneNumber"
-                class="form-control"
-                type="text"
-                name="phoneNumbers"
-                class="form-control"
-                id="phoneNumbers"
-                placeholder="phoneNumbers"
-                required
-              /> -->
-          <!-- </div>
-          </div> -->
 
           <div class="modal-footer">
             <button
@@ -319,40 +291,16 @@
             />
           </div>
 
-          <!-- <input
-              type="hidden"
-              formControlName="id"
-              class="form-control"
-              name="id"
-              id="id"
-              ngModel="{{phoneNumId}}"
-              placeholder="id"
-            /> -->
-          <!-- ngModel="{{ editDevice?.phoneNumbers?.id}}" -->
           <div class="form-group">
             <label for="phoneNumbers">Phone Number</label>
             <select formControlName="phoneNumber">
-              <option>{{nullValue}}</option>
-              <option *ngFor="let phone of phoneNumberList">
+              <option>{{ nullValue }}</option>
+              <option *ngFor="let phone of userPhoneNumberList">
                 <ng-container *ngIf="phone?.phoneNumber">
-                  {{phone?.phoneNumber}}
+                  {{ phone?.phoneNumber }}
                 </ng-container>
               </option>
             </select>
-            <!-- <input
-                formControlName="phoneNumber"
-                [class.is-invalid]="
-                  editFormGroup.get('phoneNumbers.phoneNumber').invalid &&
-                  editFormGroup.get('phoneNumbers.phoneNumber').touched
-                "
-                class="form-control"
-                type="text"
-                ngModel="{{ editDevice?.phoneNumbers?.phoneNumber}}"
-                name="phoneNumbers"
-                id="phoneNumbers"
-                placeholder="phoneNumbers"
-                required
-              /> -->
           </div>
 
           <div class="modal-footer">

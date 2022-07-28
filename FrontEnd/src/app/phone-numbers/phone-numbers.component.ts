@@ -1,7 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PhoneNumber } from '../Response/phoneNumbers';
 import { PhoneNumbersService } from '../service/phone-numbers.service';
+import { SharedService } from '../service/shared.service';
 
 @Component({
   selector: 'app-phone-numbers',
@@ -10,17 +11,39 @@ import { PhoneNumbersService } from '../service/phone-numbers.service';
 })
 export class PhoneNumbersComponent implements OnInit {
   public phoneNumberList: PhoneNumber[];
+  public userPhoneNumberList: PhoneNumber[];
   public editPhoneNumber: PhoneNumber;
   public deletePhoneNumber: PhoneNumber;
-  constructor(private PhoneNumbersService: PhoneNumbersService) {}
+  userId: number;
 
+  constructor(
+    private PhoneNumbersService: PhoneNumbersService,
+    private sharedService: SharedService
+  ) {}
+
+  // Get the phone numbers of the currently logged in user
+  //////////////////////////////////////////////////////////////////////////////
+  public getUserPhoneNumbers(): void {
+    this.PhoneNumbersService.getUserPhoneNumbers(
+      this.sharedService.getUserId()
+    ).subscribe({
+      next: (response: PhoneNumber[]) => {
+        this.userPhoneNumberList = response;
+      },
+      error: (error: HttpErrorResponse) => {
+        alert(error.message);
+      },
+    });
+  }
+  ///////////////////////////////////////////////////////////////////////////////
+
+  //get the all the phone numbers no matter the user (this is not used, but left in in case it is needed)
   public getPhoneNumbers(): void {
     this.PhoneNumbersService.getPhoneNumber().subscribe({
       next: (response: PhoneNumber[]) => {
         this.phoneNumberList = response;
       },
       error: (error: HttpErrorResponse) => {
-        console.log(error.message);
         alert(error.message);
       },
     });
@@ -59,5 +82,8 @@ export class PhoneNumbersComponent implements OnInit {
 
   async ngOnInit() {
     this.getPhoneNumbers();
+    this.getUserPhoneNumbers();
+
+    this.userId = this.sharedService.getUserId();
   }
 }

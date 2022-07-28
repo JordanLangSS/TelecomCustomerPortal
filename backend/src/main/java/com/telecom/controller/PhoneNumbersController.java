@@ -1,6 +1,5 @@
 package com.telecom.controller;
 
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import com.telecom.model.PhoneNumbers;
 import com.telecom.service.PhoneNumbersService;
 
@@ -31,6 +29,13 @@ public class PhoneNumbersController {
     @GetMapping("/all")
     public ResponseEntity<List<PhoneNumbers>> findAllPhoneNumbers() {
         List<PhoneNumbers> phoneNumbers = phoneNumbersService.findAllPhoneNumbers();
+        return new ResponseEntity<>(phoneNumbers, HttpStatus.OK);
+    }
+
+    // get user account phoneNumbers
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<PhoneNumbers>> findAllUserPhoneNumbers(@PathVariable Long userId) {
+        List<PhoneNumbers> phoneNumbers = phoneNumbersService.findUserPhoneNumById(userId);
         return new ResponseEntity<>(phoneNumbers, HttpStatus.OK);
     }
 
@@ -58,4 +63,3 @@ public class PhoneNumbersController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
-

@@ -1,16 +1,16 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Plan } from '../Response/plans';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PlanService {
- 
-  private apiServeUrl = 'http://localhost:8080';
+  private apiServeUrl = environment.Url;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   public getPlans(): Observable<Plan[]> {
     return this.http.get<Plan[]>(`${this.apiServeUrl}/plan/all`);
@@ -27,5 +27,4 @@ export class PlanService {
   public deletePlan(planId: number): Observable<void> {
     return this.http.delete<void>(`${this.apiServeUrl}/plan/delete/${planId}`);
   }
-
 }
