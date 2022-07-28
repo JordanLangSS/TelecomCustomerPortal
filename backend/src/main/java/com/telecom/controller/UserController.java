@@ -54,15 +54,11 @@ public class UserController {
     public ResponseEntity<?> loginUser(@RequestBody User userData) {
         User user = repo.findByuserName(userData.getUserName());
         System.out.println(userData.getUserName());
-        if (user.getPassword().equals(userData.getPassword())){
-            System.out.println(findUserId(user));
-            System.out.println(userData.getPassword());
-            System.out.println(user.getPassword());
+        if (user.getPassword().equals(userData.getPassword())) {
             return ResponseEntity.ok(user.getId());
         }
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Incorrect username and password combination");
-                  
+
     }
-    
 
 }

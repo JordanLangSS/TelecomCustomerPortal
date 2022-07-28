@@ -5,13 +5,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
-@Data // Generate Getters and Setters
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class CurrentDevice {
@@ -31,5 +36,9 @@ public class CurrentDevice {
 
     @Column(name = "phone_number", unique = true)
     private String phoneNumber;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
 
 }

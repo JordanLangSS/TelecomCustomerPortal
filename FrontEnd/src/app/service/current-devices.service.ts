@@ -41,4 +41,10 @@ export class CurrentDevicesService {
       `${this.apiServeUrl}/currentdevice/delete/${CurrentDeviceId}`
     );
   }
+
+  public getUserCurrentPlans(userId: number): Observable<CurrentDevices[]> {
+    return this.http.get<CurrentDevices[]>(
+      `${this.apiServeUrl}/currentdevice/user/${userId}`
+    );
+  }
 }

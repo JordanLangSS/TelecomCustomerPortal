@@ -8,6 +8,7 @@ export class SharedService {
 
   deviceLimit: number;
   userId: any;
+  userName: String;
 
   setDeviceLimit(data) {
     this.deviceLimit = data;
@@ -23,5 +24,13 @@ export class SharedService {
 
   getUserId() {
     return this.userId;
+  }
+
+  setUserName(data) {
+    this.userName = data;
+  }
+
+  getUserName() {
+    return this.userName;
   }
 }
