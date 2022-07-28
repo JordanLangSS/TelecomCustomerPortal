@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,6 +33,9 @@ import lombok.ToString;
 @AllArgsConstructor
 public class User {
 
+    public User(Long id, String userName, String password) {
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column
@@ -45,8 +49,12 @@ public class User {
     private String password;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = { CascadeType.ALL })
     private Set<PhoneNumbers> phoneNumbers;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = { CascadeType.ALL })
+    private Set<CurrentPlan> currentPlans;
 
     // @Column(name = "firstname")
     // @NotEmpty(message = "The user must have a first name")

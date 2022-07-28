@@ -9,45 +9,67 @@ import { SharedService } from '../service/shared.service';
 @Component({
   selector: 'app-plans',
   templateUrl: './plans.component.html',
-  styleUrls: ['./plans.component.css']
+  styleUrls: ['./plans.component.css'],
 })
 export class PlansComponent implements OnInit {
-
   public plansList: Plan[];
   public currentPlansList: CurrentPlan[];
+  public currentUserPlansList: CurrentPlan[];
   public editPlan: Plan; //plan the user clicking on to add to their current plans
   public deletePlan: Plan; //delete plan when the user clicks delete
 
   public total = 0; //total Bill from all the prices from the active plans
   public totalDevices = 0; //total active devices
   public value;
+  open_error: boolean = false;
 
-  constructor(private planService: PlanService, private currentPlanService: CurrentPlansService, private sharedService: SharedService) {}
+  constructor(
+    private planService: PlanService,
+    private currentPlanService: CurrentPlansService,
+    private sharedService: SharedService
+  ) {}
 
-  public findsum(data){    
-    this.value=data
+  public findsum(data) {
+    this.value = data;
     this.total = 0; //rest back to zero to avoid double loop
     this.totalDevices = 0;
-    for(let j=0;j<data.length;j++){   
-         this.total+= this.value[j].price  
-         this.totalDevices+= this.value[j].deviceLimit
-    } 
+    for (let j = 0; j < data.length; j++) {
+      this.total += this.value[j].price;
+      this.totalDevices += this.value[j].deviceLimit;
+    }
     //pass the device limit to the devices component
-    this.sharedService.setDeviceLimit(this.totalDevices); 
-  } 
+    this.sharedService.setDeviceLimit(this.totalDevices);
+  }
+
+  //////////////////////////////////////////////////////////////////////////////
+  // public getUserCurrentPlans(): void {
+  //   this.currentPlanService
+  //     .getUserCurrentPlans(this.sharedService.getUserId())
+  //     .subscribe({
+  //       next: (response: CurrentPlan[]) => {
+  //         this.currentUserPlansList = response;
+  //         this.findsum(this.currentUserPlansList);
+  //       },
+  //       error: (error: HttpErrorResponse) => {
+  //         console.log(error.message);
+  //         alert(error.message);
+  //       },
+  //     });
+  // }
+  //////////////////////////////////////////////////////////////////////////////
 
   public getCurrentPlans(): void {
     this.currentPlanService.getCurrentPlans().subscribe({
       next: (response: CurrentPlan[]) => {
         this.currentPlansList = response;
-        this.findsum(this.currentPlansList); 
-        
+        this.findsum(this.currentPlansList);
       },
       error: (error: HttpErrorResponse) => {
-        console.log(error.message);
-        alert(error.message);
-      }
+        this.open_error = true;
+        //alert(error.message);
+      },
     });
+    this.open_error = false;
   }
 
   public getPlans(): void {
@@ -56,62 +78,58 @@ export class PlansComponent implements OnInit {
         this.plansList = response;
       },
       error: (error: HttpErrorResponse) => {
-        console.log(error.message);
         alert(error.message);
-      }
+      },
     });
   }
 
   // use a Form to add a plan to the backend
   public onAddPlan(currentPlan: CurrentPlan): void {
-    document.getElementById("add-plan-form").click();
+    document.getElementById('add-plan-form').click();
     this.currentPlanService.addCurrentPlan(currentPlan).subscribe({
       next: (response: CurrentPlan) => {
-        console.log(response);
         this.getCurrentPlans(); //call getPlans to re-update list
       },
       error: (error: HttpErrorResponse) => {
-        console.log(error.message);
+        this.open_error = true;
+        //alert(error.message);
+      },
+    });
+    this.open_error = false;
+  }
+
+  // use a Form to delete a plan to the backend
+  public onDeletePlan(planId: number): void {
+    document.getElementById('delete-plan-form').click();
+    this.currentPlanService.deleteCurrentPlan(planId).subscribe({
+      //void because service does not return anything
+      next: (response: void) => {
+        this.getCurrentPlans(); //call getPlans to re-update list
+      },
+      error: (error: HttpErrorResponse) => {
         alert(error.message);
-      }
+      },
     });
   }
 
-    // use a Form to delete a plan to the backend
-    public onDeletePlan(planId: number): void {
-      document.getElementById("delete-plan-form").click();
-      this.currentPlanService.deleteCurrentPlan(planId).subscribe({
-        //void because service does not return anything
-        next: (response: void) => { 
-          console.log(response);
-          this.getCurrentPlans(); //call getPlans to re-update list
-        },
-        error: (error: HttpErrorResponse) => {
-          console.log(error.message);
-          alert(error.message);
-        }
-      });
-    }
-
-
-    // use this to control which modal shows when a specific button is pressed
+  // use this to control which modal shows when a specific button is pressed
   public onOpenModal(plan: Plan, mode: string): void {
-    const container = document.getElementById("main-container");
-    const button = document.createElement("button");
-    button.type = "button";
-    button.style.display = "none";
-    button.setAttribute("data-backdrop","static");
-    button.setAttribute("data-bs-toggle", "modal");
-    
+    const container = document.getElementById('main-container');
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.style.display = 'none';
+    button.setAttribute('data-backdrop', 'static');
+    button.setAttribute('data-bs-toggle', 'modal');
+
     //open the add modal if the user clicks the "add now" button
-    if (mode === "add") {
+    if (mode === 'add') {
       this.editPlan = plan;
       button.setAttribute('data-bs-target', '#addModal');
     }
     // Open the Delete Modal if the user clicks the delete button
-    if (mode === "delete") {
+    if (mode === 'delete') {
       this.deletePlan = plan;
-      button.setAttribute("data-bs-target", "#deletePlanModal");
+      button.setAttribute('data-bs-target', '#deletePlanModal');
     }
     container.appendChild(button);
     button.click();
@@ -120,7 +138,6 @@ export class PlansComponent implements OnInit {
   async ngOnInit() {
     this.getPlans();
     this.getCurrentPlans();
-
+    //this.getUserCurrentPlans();
   }
-
 }

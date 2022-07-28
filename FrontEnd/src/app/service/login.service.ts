@@ -3,17 +3,14 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '../Response/user';
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LoginService {
+  private apiServeUrl = 'http://localhost:8080/user/login';
+  constructor(private httpClient: HttpClient) {}
 
-  private apiServeUrl="http://localhost:8080/user/login";
-  constructor(private httpClient: HttpClient) { }
-
-  loginUser(user: User):Observable<object>{
-    console.log(user)
+  loginUser(user: User): Observable<object> {
     return this.httpClient.post(`${this.apiServeUrl}`, user);
   }
 }

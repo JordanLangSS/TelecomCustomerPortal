@@ -14,7 +14,7 @@ export class PhoneNumbersComponent implements OnInit {
   public userPhoneNumberList: PhoneNumber[];
   public editPhoneNumber: PhoneNumber;
   public deletePhoneNumber: PhoneNumber;
-  userId = 10;
+  userId: number;
 
   constructor(
     private PhoneNumbersService: PhoneNumbersService,
@@ -28,10 +28,8 @@ export class PhoneNumbersComponent implements OnInit {
     ).subscribe({
       next: (response: PhoneNumber[]) => {
         this.userPhoneNumberList = response;
-        console.log(this.userId);
       },
       error: (error: HttpErrorResponse) => {
-        console.log(error.message);
         alert(error.message);
       },
     });
@@ -43,7 +41,6 @@ export class PhoneNumbersComponent implements OnInit {
         this.phoneNumberList = response;
       },
       error: (error: HttpErrorResponse) => {
-        console.log(error.message);
         alert(error.message);
       },
     });
@@ -85,6 +82,5 @@ export class PhoneNumbersComponent implements OnInit {
     this.getUserPhoneNumbers();
 
     this.userId = this.sharedService.getUserId();
-    console.log(this.userId);
   }
 }
