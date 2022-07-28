@@ -23,12 +23,21 @@
      
     </ng-template>
   </ng-container>
-  <ng-container ngbNavItem>
+  <ng-container ngbNavItem class="">
     <a class="nav-link" routerLink="/devices">Devices</a>
     <ng-template ngbNavContent>
     </ng-template>
   </ng-container>
+  
+  <ng-container ngbNavItem class="">
+    <a class="nav-link" href="/login">Logout</a>
+    <ng-template ngbNavContent>
+    </ng-template>
+  </ng-container>
+  
+  
 </nav>
+
 
 <div [ngbNavOutlet]="nav" class="mt-2"></div>
 

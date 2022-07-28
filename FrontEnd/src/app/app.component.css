@@ -17,4 +17,15 @@
     color: black;
     background-color: beige;
 }
+.nav-tabs{
+    width: 100%;
+}
+.right-side-button{
+    float: right;
+}
+
+.nav-link-logout{
+    color: black;
+    background-color: beige;
+}
 

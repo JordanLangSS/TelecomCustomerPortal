@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.telecom.model.User;
 import com.telecom.repository.UserRepository;
 import com.telecom.service.UserService;
+
 import java.util.*;
 
 @RestController
@@ -53,11 +54,15 @@ public class UserController {
     public ResponseEntity<?> loginUser(@RequestBody User userData) {
         User user = repo.findByuserName(userData.getUserName());
         System.out.println(userData.getUserName());
-        System.out.println(user);
-
-        if (user.getPassword().equals(userData.getPassword()))
+        if (user.getPassword().equals(userData.getPassword())){
             System.out.println(findUserId(user));
-        return ResponseEntity.ok(findUserId(user));
+            System.out.println(userData.getPassword());
+            System.out.println(user.getPassword());
+            return ResponseEntity.ok(user.getId());
+        }
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Incorrect username and password combination");
+                  
     }
+    
 
 }
