@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CurrentPlan } from '../Response/currentPlans';
 import { Plan } from '../Response/plans';
 import { PlanService } from '../service/plan.service';
@@ -42,20 +42,21 @@ export class PlansComponent implements OnInit {
   }
 
   //////////////////////////////////////////////////////////////////////////////
-  // public getUserCurrentPlans(): void {
-  //   this.currentPlanService
-  //     .getUserCurrentPlans(this.sharedService.getUserId())
-  //     .subscribe({
-  //       next: (response: CurrentPlan[]) => {
-  //         this.currentUserPlansList = response;
-  //         this.findsum(this.currentUserPlansList);
-  //       },
-  //       error: (error: HttpErrorResponse) => {
-  //         console.log(error.message);
-  //         alert(error.message);
-  //       },
-  //     });
-  // }
+  //use this to get the current user plans (however is not used due to no implementation with adding/deleting current user plans)
+  public getUserCurrentPlans(): void {
+    this.currentPlanService
+      .getUserCurrentPlans(this.sharedService.getUserId())
+      .subscribe({
+        next: (response: CurrentPlan[]) => {
+          this.currentUserPlansList = response;
+          this.findsum(this.currentUserPlansList);
+        },
+        error: (error: HttpErrorResponse) => {
+          console.log(error.message);
+          alert(error.message);
+        },
+      });
+  }
   //////////////////////////////////////////////////////////////////////////////
 
   public getCurrentPlans(): void {
@@ -66,7 +67,6 @@ export class PlansComponent implements OnInit {
       },
       error: (error: HttpErrorResponse) => {
         this.open_error = true;
-        //alert(error.message);
       },
     });
     this.open_error = false;
@@ -92,7 +92,6 @@ export class PlansComponent implements OnInit {
       },
       error: (error: HttpErrorResponse) => {
         this.open_error = true;
-        //alert(error.message);
       },
     });
     this.open_error = false;
@@ -138,6 +137,7 @@ export class PlansComponent implements OnInit {
   async ngOnInit() {
     this.getPlans();
     this.getCurrentPlans();
-    //this.getUserCurrentPlans();
+
+    //this.getUserCurrentPlans(); //unused call
   }
 }

@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CurrentDevices } from '../Response/currentDevices';
 import { Devices } from '../Response/devices';
 import { CurrentDevicesService } from '../service/current-devices.service';
@@ -25,7 +25,7 @@ export class DevicesComponent implements OnInit {
     private PhoneNumbersService: PhoneNumbersService
   ) {}
 
-  deviceLimit: number; // use to retrieve from the plans table component
+  deviceLimit: number; // use to retrieve from the devices table component
   numDevices: number;
 
   public devicesList: Devices[];
@@ -37,25 +37,18 @@ export class DevicesComponent implements OnInit {
   public deleteDevice: Devices; //delete device when the user clicks delete
   userId: number;
   open_error: boolean = false;
-
   nullValue = null;
 
   addFormGroup: FormGroup = this.fb.group({
     make: [''],
     model: [''],
-    // phoneNumbers: this.fb.group({
-    //   phoneNumber: [null, [ Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
-    // })
   });
 
   editFormGroup: FormGroup = this.fb.group({
     id: [''],
     make: [''],
     model: [''],
-    //phoneNumbers: this.fb.group({
-    //id: [null],
-    phoneNumber: [null], //[ Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]
-    // }),
+    phoneNumber: [null],
   });
 
   public NullOurPhoneNum(currentDevice: CurrentDevices): void {
@@ -72,6 +65,7 @@ export class DevicesComponent implements OnInit {
     this.open_error = false;
   }
 
+  //loop to track the total number of active devices
   public findTotalRows(data) {
     for (let j = 0; j < data.length; j++) {
       this.numDevices = j + 1;
@@ -100,6 +94,8 @@ export class DevicesComponent implements OnInit {
       },
     });
   }
+
+  //get the current session users phone numbers
   ///////////////////////////////////////////////////////////////////
   public getUserPhoneNumbers(): void {
     this.PhoneNumbersService.getUserPhoneNumbers(
@@ -126,13 +122,13 @@ export class DevicesComponent implements OnInit {
     });
   }
 
-  // use a Form to delete a plan to the backend
+  // use a Form to delete a device to the backend
   public onDeleteCurrentDevice(currentDeviceId: number): void {
     document.getElementById('delete-plan-form').click();
     this.CurrentDevicesService.deleteCurrentDevices(currentDeviceId).subscribe({
       //void because service does not return anything
       next: (response: void) => {
-        this.getCurrentDevices(); //call getPlans to re-update list
+        this.getCurrentDevices(); //call getDevices to re-update list
       },
       error: (error: HttpErrorResponse) => {
         alert(error.message);
@@ -143,12 +139,6 @@ export class DevicesComponent implements OnInit {
   // use a Form to add a current device to the backend
   public onAddDevice(currentDevice: CurrentDevices): void {
     document.getElementById('add-plan-form').click();
-
-    //If the user enters an empty string, just change it to null
-    // if (currentDevice.phoneNumbers.phoneNumber === ''){
-    //   currentDevice.phoneNumbers.phoneNumber = null;
-    // }
-
     this.CurrentDevicesService.addCurrentDevices(currentDevice).subscribe({
       next: (response: CurrentDevices) => {
         this.getCurrentDevices(); //call getDevices to re-update list
@@ -163,16 +153,6 @@ export class DevicesComponent implements OnInit {
   // use a Form to add a current device to the backend
   public onEditDevice(currentDevice: CurrentDevices): void {
     document.getElementById('edit-plan-form').click();
-
-    //If the user enters an empty string, just change it to null
-    // if (currentDevice.phoneNumbers.phoneNumber === ''){
-    //   currentDevice.phoneNumbers.phoneNumber = null;
-    // }
-
-    //if (!this.phoneNumberList.includes(this.temp.phoneNumber)) {
-    //currentDevice.phoneNumbers.phoneNumber = this.temp.phoneNumber;
-    //}
-
     this.CurrentDevicesService.updateCurrentDevices(currentDevice).subscribe({
       next: (response: CurrentDevices) => {
         this.getCurrentDevices(); //call getDevices to re-update list
@@ -199,6 +179,7 @@ export class DevicesComponent implements OnInit {
       button.setAttribute('data-bs-target', '#addModal');
       this.getPhoneNumbers();
     }
+    //open the edit modal if the user clicks the "edit" button
     if (mode === 'edit') {
       this.editDevice = device;
       button.setAttribute('data-bs-target', '#editModal');
@@ -215,7 +196,6 @@ export class DevicesComponent implements OnInit {
 
   // Reset the add form if the close button is pressed
   public onCloseAdd() {
-    // this.addFormGroup.get('phoneNumbers.phoneNumber').setValue(null);
     this.addFormGroup.markAsPristine();
     this.addFormGroup.markAsUntouched();
     this.addFormGroup.updateValueAndValidity();

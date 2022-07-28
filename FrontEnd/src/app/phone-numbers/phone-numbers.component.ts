@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PhoneNumber } from '../Response/phoneNumbers';
 import { PhoneNumbersService } from '../service/phone-numbers.service';
 import { SharedService } from '../service/shared.service';
@@ -21,6 +21,7 @@ export class PhoneNumbersComponent implements OnInit {
     private sharedService: SharedService
   ) {}
 
+  // Get the phone numbers of the currently logged in user
   //////////////////////////////////////////////////////////////////////////////
   public getUserPhoneNumbers(): void {
     this.PhoneNumbersService.getUserPhoneNumbers(
@@ -35,6 +36,8 @@ export class PhoneNumbersComponent implements OnInit {
     });
   }
   ///////////////////////////////////////////////////////////////////////////////
+
+  //get the all the phone numbers no matter the user (this is not used, but left in in case it is needed)
   public getPhoneNumbers(): void {
     this.PhoneNumbersService.getPhoneNumber().subscribe({
       next: (response: PhoneNumber[]) => {
