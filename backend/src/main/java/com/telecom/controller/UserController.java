@@ -17,7 +17,7 @@ import com.telecom.model.User;
 import com.telecom.repository.UserRepository;
 import com.telecom.service.UserService;
 
-import java.io.Console;
+
 import java.util.*;
 
 @RestController
@@ -48,24 +48,9 @@ public class UserController {
         return new ResponseEntity<>(updateUser, HttpStatus.OK);
     }
 
-    // @DeleteMapping("/delete/{id}")
-    // public ResponseEntity<?> deleteUser(@PathVariable("id") Long id) {
-    // userService.deleteUser(id);
-    // return new ResponseEntity<>(HttpStatus.OK);
-    // }
-
-    // @GetMapping("/find/{userName}")
-    // public ResponseEntity<User> findUserByUserName(@PathVariable("userName")
-    // String userName) {
-    // User user = userService.findUserByUserName(userName);
-    // return new ResponseEntity<>(user, HttpStatus.OK);
-    // }
-
     @GetMapping("/id")
     public Long findUserId(User user) {
-        //List<User> users = userService.findAllUsers();
         Long id = user.getId();
-        //System.out.println(id);
         return id;
     }
 
@@ -73,10 +58,16 @@ public class UserController {
     public ResponseEntity<?> loginUser(@RequestBody User userData) {
         User user = repo.findByuserName(userData.getUserName());
         System.out.println(userData.getUserName());
-        //System.out.println(user.getId());
-        if (user.getPassword().equals(userData.getPassword()))
+        if (user.getPassword().equals(userData.getPassword())){
             System.out.println(findUserId(user));
-            return ResponseEntity.ok(findUserId(user));
+            System.out.println(userData.getPassword());
+            System.out.println(user.getPassword());
+            return ResponseEntity.ok(user.getId());
+        }
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Incorrect username and password combination");
+            
+            
     }
+    
 
 }
