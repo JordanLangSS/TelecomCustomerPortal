@@ -56,16 +56,4 @@ public class User {
     @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = { CascadeType.ALL })
     private Set<CurrentPlan> currentPlans;
 
-    // @Column(name = "firstname")
-    // @NotEmpty(message = "The user must have a first name")
-    // private String firstName;
-
-    // @Column(name = "lastname")
-    // @NotEmpty(message = "The user must have a last name")
-    // private String lastName;
-
-    // @Column
-    // @NotEmpty(message = "The user must have an email")
-    // private String email;
-
 }
