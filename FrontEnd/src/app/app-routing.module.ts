@@ -17,12 +17,12 @@ const routes: Routes = [
   {
     path: 'plans',
     component: PlansComponent,
-    // canActivate: [AuthGuardService],
+    canActivate: [AuthGuardService],
   },
   {
     path: 'devices',
     component: DevicesComponent,
-    //  canActivate: [AuthGuardService],
+    canActivate: [AuthGuardService],
   },
   {
     path: 'login',
@@ -31,7 +31,7 @@ const routes: Routes = [
   {
     path: 'phonenumber',
     component: PhoneNumbersComponent,
-    // canActivate: [AuthGuardService],
+    canActivate: [AuthGuardService],
   },
   {
     path: '',
