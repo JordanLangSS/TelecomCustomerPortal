@@ -21,6 +21,17 @@ public class CurrentDeviceService {
         return currentDeviceRepository.save(currentDevice);
     }
 
+    public List<CurrentDevice> findUserCurrentDevicesById(Long id) {
+        log.info("Getting current devices for user Id: {}", id);
+        return currentDeviceRepository.findUserCurrentDevicesById(id);
+    }
+
+    public CurrentDevice findCurrentDeviceById(Long id) {
+        log.info("Getting current device Id: {}", id);
+        return currentDeviceRepository.findCurrentDeviceById(id)
+                .orElseThrow(() -> new PlanNotFoundException("Device with id" + id + " was not found"));
+    }
+
     public List<CurrentDevice> findAllCurrentDevices() {
         log.info("Getting all current devices");
         return currentDeviceRepository.findAll();
@@ -36,14 +47,4 @@ public class CurrentDeviceService {
         currentDeviceRepository.deleteCurrentDeviceById(id);
     }
 
-    public CurrentDevice findCurrentDeviceById(Long id) {
-        log.info("Getting current device Id: {}", id);
-        return currentDeviceRepository.findCurrentDeviceById(id)
-                .orElseThrow(() -> new PlanNotFoundException("Device with id" + id + " was not found"));
-    }
-
-    public List<CurrentDevice> findUserCurrentDevicesById(Long id) {
-        log.info("Getting current devices for user Id: {}", id);
-        return currentDeviceRepository.findUserCurrentDevicesById(id);
-    }
 }
