@@ -1,5 +1,6 @@
 package com.telecom.model;
 
+import java.util.List;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -45,5 +46,9 @@ public class User {
     @JsonManagedReference
     @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = { CascadeType.ALL })
     private Set<CurrentPlan> currentPlans;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = { CascadeType.ALL })
+    private List<CurrentPlan> currentDevices;
 
 }

@@ -21,7 +21,8 @@ export class PlansComponent implements OnInit {
   public total = 0; //total Bill from all the prices from the active plans
   public totalDevices = 0; //total active devices
   public value;
-  open_error: boolean = false;
+  public open_error: boolean = false;
+  public userName: String;
 
   constructor(
     private planService: PlanService,
@@ -42,7 +43,7 @@ export class PlansComponent implements OnInit {
   }
 
   //////////////////////////////////////////////////////////////////////////////
-  //use this to get the current user plans (however is not used due to no implementation with adding/deleting current user plans)
+  //use this to get the current user plans
   public getUserCurrentPlans(): void {
     this.currentPlanService
       .getUserCurrentPlans(this.sharedService.getUserId())
@@ -137,6 +138,8 @@ export class PlansComponent implements OnInit {
   async ngOnInit() {
     this.getPlans();
     this.getCurrentPlans();
+
+    this.userName = this.sharedService.getUserName();
 
     //this.getUserCurrentPlans(); //unused call
   }

@@ -30,6 +30,13 @@ public class CurrentDeviceController {
         return new ResponseEntity<>(currentDevices, HttpStatus.OK);
     }
 
+    // get user account phoneNumbers
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<CurrentDevice>> findUserCurrentDevicesById(@PathVariable Long userId) {
+        List<CurrentDevice> currentDevices = currentDeviceService.findUserCurrentDevicesById(userId);
+        return new ResponseEntity<>(currentDevices, HttpStatus.OK);
+    }
+
     @GetMapping("/find/{id}")
     public ResponseEntity<CurrentDevice> findCurrentDeviceById(@PathVariable("id") Long id) {
         CurrentDevice currentDevice = currentDeviceService.findCurrentDeviceById(id);

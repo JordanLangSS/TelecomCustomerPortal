@@ -14,7 +14,8 @@ export class PhoneNumbersComponent implements OnInit {
   public userPhoneNumberList: PhoneNumber[];
   public editPhoneNumber: PhoneNumber;
   public deletePhoneNumber: PhoneNumber;
-  userId: number;
+  public userId: number;
+  public userName: String;
 
   constructor(
     private PhoneNumbersService: PhoneNumbersService,
@@ -85,5 +86,6 @@ export class PhoneNumbersComponent implements OnInit {
     this.getUserPhoneNumbers();
 
     this.userId = this.sharedService.getUserId();
+    this.userName = this.sharedService.getUserName();
   }
 }

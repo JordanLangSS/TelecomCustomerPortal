@@ -3,6 +3,12 @@
     <div class="container">
       <div class="row justify-content-md-center">
         <div class="col-xl-5 col-lg-6 col-md-8">
+          <h2
+            class="section-title text-center title-ex1"
+            style="margin-bottom: 3rem"
+          >
+            <u>Welcome {{userName}}!</u>
+          </h2>
           <div class="section-title text-center title-ex1">
             <h2>Our Plans!</h2>
           </div>
@@ -14,7 +20,7 @@
           <div *ngFor="let plan of plansList" class="col-md-4">
             <div class="price-card">
               <h2>{{ plan.planName }}</h2>
-              <p>ADD A DESCRIPTION TO THE DB FOR THIS</p>
+
               <p class="price">
                 <span>{{ plan.price }}</span
                 >/ Month
